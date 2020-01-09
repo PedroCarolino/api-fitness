@@ -1,8 +1,8 @@
 package com.app.apiFitness.controller
 
 
-import com.app.apiFitness.entity.User
-import com.app.apiFitness.repository.UserRepository
+import com.app.apiFitness.database.repository.entity.User
+import com.app.apiFitness.database.repository.UserRepository
 import org.springframework.web.bind.annotation.*
 
 @RestController
