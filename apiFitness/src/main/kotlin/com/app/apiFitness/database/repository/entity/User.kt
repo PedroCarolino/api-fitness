@@ -1,4 +1,5 @@
-package com.app.apiFitness.entity
+package com.app.apiFitness.database.repository.entity
+import com.app.apiFitness.constants.enums.UserStatusEnum
 import javax.persistence.*
 
 @Entity
@@ -28,4 +29,5 @@ data class User (
         val zipCode: Long? = null,
         @Column(name = "telephone")
         val telephone: Long? = null
+
 )
