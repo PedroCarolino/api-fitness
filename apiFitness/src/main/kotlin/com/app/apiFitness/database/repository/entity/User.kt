@@ -1,5 +1,6 @@
 package com.app.apiFitness.database.repository.entity
 import com.app.apiFitness.constants.enums.UserStatusEnum
+import com.app.apiFitness.controller.dto.request.UserRequestDTO
 import javax.persistence.*
 
 @Entity
@@ -7,27 +8,41 @@ import javax.persistence.*
 data class User (
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-        val id: Long? = null,
+        var id: Long? = null,
         @Column(name = "name")
-        val name: String? = null,
+        var name: String? = null,
         @Column(name = "nickname")
-        val nickname: String? = null,
+        var nickname: String? = null,
         @Column(name = "email")
-        val email: String? = null,
+        var email: String? = null,
         @Column(name = "address")
-        val address: String? = null,
+        var address: String? = null,
         @Column(name = "role")
         @Enumerated(EnumType.STRING)
-        val role: UserStatusEnum? = null,
+        var role: UserStatusEnum? = null,
         @Column(name = "password")
-        val password: String? = null,
+        var password: String? = null,
         @Column(name = "gender")
-        val gender: String? = null,
+        var gender: String? = null,
         @Column(name = "age")
-        val age: Long? = null,
+        var age: Long? = null,
         @Column(name = "cep")
-        val zipCode: Long? = null,
+        var zipCode: Long? = null,
         @Column(name = "telephone")
-        val telephone: Long? = null
+        var telephone: Long? = null
 
-)
+){
+        constructor(user:UserRequestDTO) : this() {
+                this.address = user.address
+                this.age = user.age
+                this.email = user.email
+                this.gender = user.gender
+                this.id = user.id
+                this.name = user.name
+                this.nickname = user.nickname
+                this.password = user.password
+                this.role = user.role
+                this.telephone = user.telephone
+                this.zipCode = user.zipCode
+        }
+}
