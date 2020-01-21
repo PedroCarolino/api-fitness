@@ -1,12 +1,14 @@
 package com.app.apiFitness.database.repository.entity
 
+import com.app.apiFitness.controller.dto.request.UserRequestDTO
 import javax.persistence.*
 
 @Entity
 @Table(name = "user", schema = "db_apifitness", catalog = "")
-open class UserEntity {
+open class UserEntity (){
     @get:Id
     @get:Column(name = "id", nullable = false, insertable = false, updatable = false)
+    @get:GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Int? = null
     @get:Basic
     @get:Column(name = "name", nullable = true)
@@ -83,6 +85,18 @@ open class UserEntity {
 
         return true
     }
-
+    constructor(user: UserRequestDTO) : this() {
+        this.address = user.address
+        this.age = user.age?.toInt()
+        this.email = user.email
+        this.gender = user.gender
+        this.id = user.id?.toInt()
+        this.name = user.name
+        this.nickname = user.nickname
+        this.password = user.password
+        this.role = user.role.toString()
+        this.telephone = user.telephone?.toInt()
+        this.zipCode = user.zipCode?.toInt()
+    }
 }
 

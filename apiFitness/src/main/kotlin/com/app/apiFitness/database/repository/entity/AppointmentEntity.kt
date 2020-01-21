@@ -24,21 +24,6 @@ open class AppointmentEntity {
                     "data = $data " +
                     "teacherHasStudentTeacherId = $teacherHasStudentTeacherId " +
                     ")"
-
-    // constant value returned to avoid entity inequality to itself before and after it's update/merge
-    override fun hashCode(): Int = 42
-
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (javaClass != other?.javaClass) return false
-        other as AppointmentEntity
-
-        if (id != other.id) return false
-        if (data != other.data) return false
-        if (teacherHasStudentTeacherId != other.teacherHasStudentTeacherId) return false
-
-        return true
-    }
-
+    
 }
 

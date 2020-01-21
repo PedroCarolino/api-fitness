@@ -19,7 +19,7 @@ open class TeacherHasStudentEntity {
     @get:JoinColumn(name = "teacher_id", referencedColumnName = "teacher_has_student_teacher_id")
     var refAppointmentEntity: AppointmentEntity? = null
     @get:ManyToOne(fetch = FetchType.LAZY)
-    @get:JoinColumn(name = "teacher_id", referencedColumnName = "id")
+    @get:JoinColumn(name = "teacher_id", referencedColumnName = "id",insertable = false, updatable = false)
     var refTeacherEntity: TeacherEntity? = null
     @get:ManyToOne(fetch = FetchType.LAZY)
     @get:JoinColumn(name = "student_id", referencedColumnName = "id")
@@ -32,20 +32,6 @@ open class TeacherHasStudentEntity {
                     "studentId = $studentId " +
                     ")"
 
-    // constant value returned to avoid entity inequality to itself before and after it's update/merge
-    override fun hashCode(): Int = 42
-
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (javaClass != other?.javaClass) return false
-        other as TeacherHasStudentEntity
-
-        if (id != other.id) return false
-        if (teacherId != other.teacherId) return false
-        if (studentId != other.studentId) return false
-
-        return true
-    }
 
 }
 

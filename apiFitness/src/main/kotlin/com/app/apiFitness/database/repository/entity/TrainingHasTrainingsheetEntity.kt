@@ -32,22 +32,5 @@ open class TrainingHasTrainingsheetEntity {
                     "trainingSheetId = $trainingSheetId " +
                     "orderTraining = $orderTraining " +
                     ")"
-
-    // constant value returned to avoid entity inequality to itself before and after it's update/merge
-    override fun hashCode(): Int = 42
-
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (javaClass != other?.javaClass) return false
-        other as TrainingHasTrainingsheetEntity
-
-        if (id != other.id) return false
-        if (trainingId != other.trainingId) return false
-        if (trainingSheetId != other.trainingSheetId) return false
-        if (orderTraining != other.orderTraining) return false
-
-        return true
-    }
-
 }
 

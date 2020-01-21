@@ -60,28 +60,5 @@ open class TrainingEntity {
                     "machineId = $machineId " +
                     ")"
 
-    // constant value returned to avoid entity inequality to itself before and after it's update/merge
-    override fun hashCode(): Int = 42
-
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (javaClass != other?.javaClass) return false
-        other as TrainingEntity
-
-        if (id != other.id) return false
-        if (name != other.name) return false
-        if (weight != other.weight) return false
-        if (series != other.series) return false
-        if (repetition != other.repetition) return false
-        if (obs != other.obs) return false
-        if (timeBetweenTraining != other.timeBetweenTraining) return false
-        if (eccentric != other.eccentric) return false
-        if (concentric != other.concentric) return false
-        if (modality != other.modality) return false
-        if (machineId != other.machineId) return false
-
-        return true
-    }
-
 }
 
