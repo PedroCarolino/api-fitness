@@ -7,6 +7,7 @@ import javax.persistence.*
 open class TrainingEntity {
     @get:Id
     @get:Column(name = "id", nullable = false, insertable = false, updatable = false)
+    @get:GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Int? = null
     @get:Basic
     @get:Column(name = "name", nullable = true)

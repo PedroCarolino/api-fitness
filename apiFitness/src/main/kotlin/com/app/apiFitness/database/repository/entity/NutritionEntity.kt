@@ -7,6 +7,7 @@ import javax.persistence.*
 open class NutritionEntity {
     @get:Id
     @get:Column(name = "id", nullable = false)
+    @get:GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Int? = null
     @get:Basic
     @get:Column(name = "urlImage", nullable = true)

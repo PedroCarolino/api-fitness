@@ -1,15 +1,17 @@
 package com.app.apiFitness.database.repository.entity
 
+import com.app.apiFitness.controller.dto.request.UserRequestDTO
 import javax.persistence.*
 
 @Entity
 @Table(name = "student", schema = "db_apifitness", catalog = "")
-open class StudentEntity {
+open class StudentEntity () {
     @get:Id
     @get:Column(name = "id", nullable = false, insertable = false, updatable = false)
+    @get:GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Int? = null
     @get:Basic
-    @get:Column(name = "user_id", nullable = false, insertable = false, updatable = false)
+    @get:Column(name = "user_id", nullable = true, insertable = false, updatable = false)
     var userId: Int? = null
 
     @get:OneToMany(mappedBy = "refStudentEntity")
@@ -29,5 +31,9 @@ open class StudentEntity {
                     "id = $id " +
                     "userId = $userId " +
                     ")"
+
+    constructor(userId: Int?) : this() {
+        this.userId = userId
+    }
 }
 

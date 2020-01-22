@@ -7,6 +7,7 @@ import javax.persistence.*
 open class GymHasUserEntity {
     @get:Id
     @get:Column(name = "Id", nullable = false)
+    @get:GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Int? = null
     @get:Basic
     @get:Column(name = "gym_id", nullable = false, insertable = false, updatable = false)
