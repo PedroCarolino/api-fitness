@@ -25,19 +25,19 @@ open class TrainingsheetEntity {
     @get:Column(name = "objective", nullable = true)
     var objective: String? = null
     @get:Basic
-    @get:Column(name = "student_id", nullable = false, insertable = false, updatable = false)
+    @get:Column(name = "student_id", nullable = false)
     var studentId: Int? = null
     @get:Basic
-    @get:Column(name = "teacher_id", nullable = false, insertable = false, updatable = false)
+    @get:Column(name = "teacher_id", nullable = false)
     var teacherId: Int? = null
 
     @get:OneToMany(mappedBy = "refTrainingsheetEntity")
     var refTrainingHasTrainingsheetEntities: List<TrainingHasTrainingsheetEntity>? = null
     @get:ManyToOne(fetch = FetchType.LAZY)
-    @get:JoinColumn(name = "student_id", referencedColumnName = "id")
+    @get:JoinColumn(name = "student_id", referencedColumnName = "id", insertable = false,updatable = false)
     var refStudentEntity: StudentEntity? = null
     @get:ManyToOne(fetch = FetchType.LAZY)
-    @get:JoinColumn(name = "teacher_id", referencedColumnName = "id")
+    @get:JoinColumn(name = "teacher_id", referencedColumnName = "id",insertable = false,updatable = false)
     var refTeacherEntity: TeacherEntity? = null
 
     override fun toString(): String =

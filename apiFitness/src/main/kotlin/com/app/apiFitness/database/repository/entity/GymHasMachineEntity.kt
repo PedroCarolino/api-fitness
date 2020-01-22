@@ -10,17 +10,17 @@ open class GymHasMachineEntity {
     @get:GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Int? = null
     @get:Basic
-    @get:Column(name = "gym_id", nullable = true, insertable = false, updatable = false)
+    @get:Column(name = "gym_id", nullable = true)
     var gymId: Int? = null
     @get:Basic
-    @get:Column(name = "machine_id", nullable = true, insertable = false, updatable = false)
+    @get:Column(name = "machine_id", nullable = true)
     var machineId: Int? = null
 
     @get:ManyToOne(fetch = FetchType.LAZY)
-    @get:JoinColumn(name = "gym_id", referencedColumnName = "id")
+    @get:JoinColumn(name = "gym_id", referencedColumnName = "id", insertable = false,updatable = false)
     var refGymEntity: GymEntity? = null
     @get:ManyToOne(fetch = FetchType.LAZY)
-    @get:JoinColumn(name = "machine_id", referencedColumnName = "id")
+    @get:JoinColumn(name = "machine_id", referencedColumnName = "id", insertable = false,updatable = false)
     var refMachineEntity: MachineEntity? = null
 
     override fun toString(): String =

@@ -10,20 +10,20 @@ open class TeacherHasStudentEntity {
     @get:GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Int? = null
     @get:Basic
-    @get:Column(name = "teacher_id", nullable = false, insertable = false, updatable = false)
+    @get:Column(name = "teacher_id", nullable = false)
     var teacherId: Int? = null
     @get:Basic
-    @get:Column(name = "student_id", nullable = false, insertable = false, updatable = false)
+    @get:Column(name = "student_id", nullable = false)
     var studentId: Int? = null
 
     @get:ManyToOne(fetch = FetchType.LAZY)
-    @get:JoinColumn(name = "teacher_id", referencedColumnName = "teacher_has_student_teacher_id")
+    @get:JoinColumn(name = "teacher_id", referencedColumnName = "teacher_has_student_teacher_id", insertable = false,updatable = false)
     var refAppointmentEntity: AppointmentEntity? = null
     @get:ManyToOne(fetch = FetchType.LAZY)
     @get:JoinColumn(name = "teacher_id", referencedColumnName = "id",insertable = false, updatable = false)
     var refTeacherEntity: TeacherEntity? = null
     @get:ManyToOne(fetch = FetchType.LAZY)
-    @get:JoinColumn(name = "student_id", referencedColumnName = "id")
+    @get:JoinColumn(name = "student_id", referencedColumnName = "id", insertable = false,updatable = false)
     var refStudentEntity: StudentEntity? = null
 
     override fun toString(): String =

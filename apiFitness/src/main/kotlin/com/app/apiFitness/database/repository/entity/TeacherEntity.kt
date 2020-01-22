@@ -13,7 +13,7 @@ open class TeacherEntity {
     @get:Column(name = "CREF", nullable = true)
     var CREF: String? = null
     @get:Basic
-    @get:Column(name = "user_id", nullable = false, updatable = false)
+    @get:Column(name = "user_id", nullable = false)
     var userId: Int? = null
 
     @get:ManyToOne(fetch = FetchType.LAZY)

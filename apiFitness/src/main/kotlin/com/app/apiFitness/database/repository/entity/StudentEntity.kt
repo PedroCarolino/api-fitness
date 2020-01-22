@@ -11,7 +11,7 @@ open class StudentEntity () {
     @get:GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Int? = null
     @get:Basic
-    @get:Column(name = "user_id", nullable = true, insertable = false, updatable = false)
+    @get:Column(name = "user_id", nullable = false)
     var userId: Int? = null
 
     @get:OneToMany(mappedBy = "refStudentEntity")
@@ -19,7 +19,7 @@ open class StudentEntity () {
     @get:OneToMany(mappedBy = "refStudentEntity")
     var refNutritionEntities: List<NutritionEntity>? = null
     @get:ManyToOne(fetch = FetchType.LAZY)
-    @get:JoinColumn(name = "user_id", referencedColumnName = "id")
+    @get:JoinColumn(name = "user_id", referencedColumnName = "id", insertable = false,updatable = false)
     var refUserEntity: UserEntity? = null
     @get:OneToMany(mappedBy = "refStudentEntity")
     var refTeacherHasStudentEntities: List<TeacherHasStudentEntity>? = null
