@@ -7,22 +7,25 @@ import com.app.apiFitness.database.repository.entity.TeacherEntity
 import com.app.apiFitness.database.repository.entity.UserEntity
 import com.app.apiFitness.service.TeacherProfileService
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Service
 
 @Service
 class TeacherProfileServiceImpl @Autowired constructor(
         private val userRepository: UserRepository,
-        private val teacherRepository: TeacherRepository): TeacherProfileService {
+        private val teacherRepository: TeacherRepository,
+        private val bCryptPasswordEncoder: BCryptPasswordEncoder): TeacherProfileService {
 
     override fun create(teacherProfileRequestDTO: TeacherProfileRequestDTO) {
-        if (verifyEmail(teacherProfileRequestDTO.user.email)) {
+        val emailIsValid = !verifyIfExistEmail(teacherProfileRequestDTO.user.email)
+        if (emailIsValid) {
             createTeacherUser(teacherProfileRequestDTO)
             createTeacher(teacherProfileRequestDTO.user.id)
         }
     }
 
-    override fun verifyEmail(email: String): Boolean {
-        return userRepository.findByEmail(email)
+    override fun verifyIfExistEmail(email: String): Boolean {
+        userRepository.findByEmail(email) ?: return true
     }
 
     override fun createUser(teacherProfileRequestDTO: TeacherProfileRequestDTO): UserEntity {

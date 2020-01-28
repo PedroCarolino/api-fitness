@@ -6,7 +6,7 @@ import com.app.apiFitness.database.repository.entity.UserEntity
 
 interface TeacherProfileService {
     fun create(teacherProfileRequestDTO: TeacherProfileRequestDTO)
-    fun verifyEmail(email: String): Boolean
+    fun verifyIfExistEmail(email: String): Boolean
     fun createUser(teacherProfileRequestDTO: TeacherProfileRequestDTO) : UserEntity
     fun createTeacherUser(teacherProfileRequestDTO: TeacherProfileRequestDTO)
     fun createTeacher(userId: Long?) : TeacherEntity
