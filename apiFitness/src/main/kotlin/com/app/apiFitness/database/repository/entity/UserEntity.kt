@@ -1,6 +1,7 @@
 package com.app.apiFitness.database.repository.entity
 
 import com.app.apiFitness.controller.dto.request.UserRequestDTO
+import com.app.apiFitness.model.UserProfileModel
 import javax.persistence.*
 
 @Entity
@@ -85,7 +86,7 @@ open class UserEntity (){
 
         return true
     }
-    constructor(user: UserRequestDTO) : this() {
+    constructor(user: UserProfileModel) : this() {
         this.address = user.address
         this.age = user.age?.toInt()
         this.email = user.email

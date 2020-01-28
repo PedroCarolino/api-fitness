@@ -4,7 +4,7 @@ import javax.persistence.*
 
 @Entity
 @Table(name = "teacher", schema = "db_apifitness", catalog = "")
-open class TeacherEntity {
+open class TeacherEntity(id: Long?) {
     @get:Id
     @get:Column(name = "id", nullable = false, insertable = false, updatable = false)
     var id: Int? = null
