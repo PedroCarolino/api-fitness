@@ -18,7 +18,7 @@ import java.lang.RuntimeException
 import javax.persistence.NonUniqueResultException
 
 @Service
-class TeacherService {
+class StudentProfileService {
 
     @Autowired
     private lateinit var userRepository: UserRepository
@@ -26,8 +26,6 @@ class TeacherService {
     @Autowired
     private lateinit var studentRepository: StudentRepository
 
-    @Autowired
-    private lateinit var teacherRepository: TeacherRepository
     @Autowired
     private lateinit var bCryptPasswordEncoder: BCryptPasswordEncoder
 
