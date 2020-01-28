@@ -17,15 +17,15 @@ class TeacherProfileServiceImpl @Autowired constructor(
         private val bCryptPasswordEncoder: BCryptPasswordEncoder): TeacherProfileService {
 
     override fun create(teacherProfileRequestDTO: TeacherProfileRequestDTO) {
-        val emailIsValid = !verifyIfExistEmail(teacherProfileRequestDTO.user.email)
+        val emailIsValid = verifyIfEmailIsValid(teacherProfileRequestDTO.user.email)
         if (emailIsValid) {
             createTeacherUser(teacherProfileRequestDTO)
             createTeacher(teacherProfileRequestDTO.user.id)
         }
     }
 
-    override fun verifyIfExistEmail(email: String): Boolean {
-        userRepository.findByEmail(email) ?: return true
+    override fun verifyIfEmailIsValid(email: String): Boolean {
+        if (userRepository.findByEmail(email) == null) return true
     }
 
     override fun createUser(teacherProfileRequestDTO: TeacherProfileRequestDTO): UserEntity {
