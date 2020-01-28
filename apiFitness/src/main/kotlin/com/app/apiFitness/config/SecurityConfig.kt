@@ -28,7 +28,8 @@ class SecurityConfig: WebSecurityConfigurerAdapter() {
 
     override fun configure(http: HttpSecurity) {
         http.csrf().disable().authorizeRequests()
-                .antMatchers(HttpMethod.POST,"/signup").permitAll()
+                .antMatchers(HttpMethod.POST).permitAll()
+                .antMatchers(HttpMethod.GET).permitAll()
                 .anyRequest().authenticated()
 
         http.addFilter(JWTAuthenticationFilter(authenticationManager(), jwtUtil = jwtUtil))

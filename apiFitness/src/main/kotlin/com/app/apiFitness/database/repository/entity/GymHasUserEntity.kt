@@ -7,19 +7,20 @@ import javax.persistence.*
 open class GymHasUserEntity {
     @get:Id
     @get:Column(name = "Id", nullable = false)
+    @get:GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Int? = null
     @get:Basic
-    @get:Column(name = "gym_id", nullable = false, insertable = false, updatable = false)
+    @get:Column(name = "gym_id", nullable = false)
     var gymId: Int? = null
     @get:Basic
-    @get:Column(name = "user_id", nullable = false, insertable = false, updatable = false)
+    @get:Column(name = "user_id", nullable = false)
     var userId: Int? = null
 
     @get:ManyToOne(fetch = FetchType.LAZY)
-    @get:JoinColumn(name = "gym_id", referencedColumnName = "id")
+    @get:JoinColumn(name = "gym_id", referencedColumnName = "id", insertable = false,updatable = false)
     var refGymEntity: GymEntity? = null
     @get:ManyToOne(fetch = FetchType.LAZY)
-    @get:JoinColumn(name = "user_id", referencedColumnName = "id")
+    @get:JoinColumn(name = "user_id", referencedColumnName = "id", insertable = false,updatable = false)
     var refUserEntity: UserEntity? = null
 
     override fun toString(): String =
