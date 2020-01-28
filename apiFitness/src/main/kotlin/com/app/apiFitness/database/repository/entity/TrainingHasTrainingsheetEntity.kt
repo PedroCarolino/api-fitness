@@ -7,22 +7,23 @@ import javax.persistence.*
 open class TrainingHasTrainingsheetEntity {
     @get:Id
     @get:Column(name = "id", nullable = false)
+    @get:GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Int? = null
     @get:Basic
-    @get:Column(name = "training_id", nullable = true, insertable = false, updatable = false)
+    @get:Column(name = "training_id", nullable = true)
     var trainingId: Int? = null
     @get:Basic
-    @get:Column(name = "trainingSheet_id", nullable = true, insertable = false, updatable = false)
+    @get:Column(name = "trainingSheet_id", nullable = true)
     var trainingSheetId: Int? = null
     @get:Basic
     @get:Column(name = "orderTraining", nullable = true)
     var orderTraining: String? = null
 
     @get:ManyToOne(fetch = FetchType.LAZY)
-    @get:JoinColumn(name = "training_id", referencedColumnName = "id")
+    @get:JoinColumn(name = "training_id", referencedColumnName = "id", insertable = false,updatable = false)
     var refTrainingEntity: TrainingEntity? = null
     @get:ManyToOne(fetch = FetchType.LAZY)
-    @get:JoinColumn(name = "trainingSheet_id", referencedColumnName = "id")
+    @get:JoinColumn(name = "trainingSheet_id", referencedColumnName = "id", insertable = false,updatable = false)
     var refTrainingsheetEntity: TrainingsheetEntity? = null
 
     override fun toString(): String =

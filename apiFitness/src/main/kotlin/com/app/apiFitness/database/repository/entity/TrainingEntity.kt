@@ -7,6 +7,7 @@ import javax.persistence.*
 open class TrainingEntity {
     @get:Id
     @get:Column(name = "id", nullable = false, insertable = false, updatable = false)
+    @get:GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Int? = null
     @get:Basic
     @get:Column(name = "name", nullable = true)
@@ -36,11 +37,11 @@ open class TrainingEntity {
     @get:Column(name = "modality", nullable = true)
     var modality: String? = null
     @get:Basic
-    @get:Column(name = "machine_id", nullable = false, insertable = false, updatable = false)
+    @get:Column(name = "machine_id", nullable = false)
     var machineId: Int? = null
 
     @get:ManyToOne(fetch = FetchType.LAZY)
-    @get:JoinColumn(name = "machine_id", referencedColumnName = "id")
+    @get:JoinColumn(name = "machine_id", referencedColumnName = "id", insertable = false,updatable = false)
     var refMachineEntity: MachineEntity? = null
     @get:OneToMany(mappedBy = "refTrainingEntity")
     var refTrainingHasTrainingsheetEntities: List<TrainingHasTrainingsheetEntity>? = null

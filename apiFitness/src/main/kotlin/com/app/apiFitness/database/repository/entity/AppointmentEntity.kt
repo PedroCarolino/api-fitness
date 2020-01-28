@@ -7,12 +7,13 @@ import javax.persistence.*
 open class AppointmentEntity {
     @get:Id
     @get:Column(name = "id", nullable = false)
+    @get:GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Int? = null
     @get:Basic
     @get:Column(name = "data", nullable = true)
     var data: java.sql.Timestamp? = null
     @get:Basic
-    @get:Column(name = "teacher_has_student_teacher_id", nullable = false, insertable = false, updatable = false)
+    @get:Column(name = "teacher_has_student_teacher_id", nullable = false)
     var teacherHasStudentTeacherId: Int? = null
 
     @get:OneToMany(mappedBy = "refAppointmentEntity")
