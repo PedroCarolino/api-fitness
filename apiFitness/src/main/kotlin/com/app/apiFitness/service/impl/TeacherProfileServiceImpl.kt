@@ -5,6 +5,7 @@ import com.app.apiFitness.database.repository.TeacherRepository
 import com.app.apiFitness.database.repository.UserRepository
 import com.app.apiFitness.database.repository.entity.TeacherEntity
 import com.app.apiFitness.database.repository.entity.UserEntity
+import com.app.apiFitness.exceptions.BusinessException
 import com.app.apiFitness.service.TeacherProfileService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
@@ -19,13 +20,15 @@ class TeacherProfileServiceImpl @Autowired constructor(
     override fun create(teacherProfileRequestDTO: TeacherProfileRequestDTO) {
         val emailIsValid = verifyIfEmailIsValid(teacherProfileRequestDTO.user.email)
         if (emailIsValid) {
-            createTeacherUser(teacherProfileRequestDTO)
-            createTeacher(teacherProfileRequestDTO.user.id)
+            createTeacher(createUser(teacherProfileRequestDTO).id,teacherProfileRequestDTO.CREF)
+        }
+        else{
+            throw BusinessException("O email passado já está sendo utilizado")
         }
     }
 
     override fun verifyIfEmailIsValid(email: String): Boolean {
-        if (userRepository.findByEmail(email) == null) return true
+        return userRepository.findByEmail(email) == null
     }
 
     override fun createUser(teacherProfileRequestDTO: TeacherProfileRequestDTO): UserEntity {
@@ -34,12 +37,10 @@ class TeacherProfileServiceImpl @Autowired constructor(
         return userRepository.save(userEntity)
     }
 
-    override fun createTeacherUser(teacherProfileRequestDTO: TeacherProfileRequestDTO) {
-        createUser(teacherProfileRequestDTO)
-    }
-
-    override fun createTeacher(userId: Long?): TeacherEntity {
-        val teacherEntity = TeacherEntity(userId)
+    override fun createTeacher(userId: Long?,CREF: String?): TeacherEntity {
+        val teacherEntity = TeacherEntity()
+        teacherEntity.userId = userId
+        teacherEntity.CREF = CREF
         return teacherRepository.save(teacherEntity)
     }
 

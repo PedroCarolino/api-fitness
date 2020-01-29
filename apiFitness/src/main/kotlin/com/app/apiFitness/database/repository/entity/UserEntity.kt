@@ -10,7 +10,7 @@ open class UserEntity (){
     @get:Id
     @get:Column(name = "id", nullable = false, insertable = false, updatable = false)
     @get:GeneratedValue(strategy = GenerationType.IDENTITY)
-    var id: Int? = null
+    var id: Long? = null
     @get:Basic
     @get:Column(name = "name", nullable = true)
     var name: String? = null
@@ -91,7 +91,7 @@ open class UserEntity (){
         this.age = user.age?.toInt()
         this.email = user.email
         this.gender = user.gender
-        this.id = user.id?.toInt()
+        this.id = user.id
         this.name = user.name
         this.nickname = user.nickname
         this.password = user.password

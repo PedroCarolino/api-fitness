@@ -1,11 +1,10 @@
 package com.app.apiFitness.controller
 
 import com.app.apiFitness.constants.ReturnMessages
-import com.app.apiFitness.controller.dto.request.UserRequestDTO
+import com.app.apiFitness.controller.dto.request.TrainingSheetCreateRequestDTO
 import com.app.apiFitness.controller.dto.response.StandardReturnDTO
 import com.app.apiFitness.exceptions.BusinessException
-import com.app.apiFitness.service.StudentProfileService
-import com.app.apiFitness.service.StudentProfileServiceImpl
+import com.app.apiFitness.service.TrainingsheetServiceImpl
 import org.apache.log4j.Logger
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
@@ -17,17 +16,16 @@ import org.springframework.web.bind.annotation.RestController
 import java.net.URI
 
 @RestController
-@RequestMapping("/create")
-class StudentProfileController {
+@RequestMapping("/createSheet")
+class TrainingsheetController {
     private val logger = Logger.getLogger(javaClass)
     @Autowired
-    private lateinit var studentProfileService: StudentProfileServiceImpl
+    private lateinit var trainingsheetServiceImpl: TrainingsheetServiceImpl
 
     @PostMapping
-    fun signup(@RequestBody user: UserRequestDTO): ResponseEntity<StandardReturnDTO> {
+    fun signup(@RequestBody trainingSheetCreateRequestDTO: TrainingSheetCreateRequestDTO): ResponseEntity<StandardReturnDTO> {
         try {
-            logger.info("Teste")
-            studentProfileService.create(user)
+            trainingsheetServiceImpl.create(trainingSheetCreateRequestDTO)
         }
         catch (ex : BusinessException){
             logger.error(ex.message,ex)

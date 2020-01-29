@@ -17,7 +17,7 @@ class UserService {
     private lateinit var bCryptPasswordEncoder: BCryptPasswordEncoder
 
     fun create(user: UserRequestDTO): UserEntity {
-        var userEntity = UserEntity(user);
+        var userEntity = UserEntity();
         userEntity.password = bCryptPasswordEncoder.encode(userEntity.password)
         return userRepository.save(userEntity)
     }

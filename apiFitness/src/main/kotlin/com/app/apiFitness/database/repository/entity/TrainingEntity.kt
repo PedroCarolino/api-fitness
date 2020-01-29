@@ -1,10 +1,12 @@
 package com.app.apiFitness.database.repository.entity
 
+import com.app.apiFitness.model.TrainingModel
+import com.app.apiFitness.model.TrainingSheetModel
 import javax.persistence.*
 
 @Entity
 @Table(name = "training", schema = "db_apifitness", catalog = "")
-open class TrainingEntity {
+open class TrainingEntity (){
     @get:Id
     @get:Column(name = "id", nullable = false, insertable = false, updatable = false)
     @get:GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -60,6 +62,18 @@ open class TrainingEntity {
                     "modality = $modality " +
                     "machineId = $machineId " +
                     ")"
+    constructor(trainingModel: TrainingModel) : this() {
+        this.concentric = trainingModel.concentric
+        this.eccentric = trainingModel.eccentric
+        this.machineId = trainingModel.machineId
+        this.modality = trainingModel.modality
+        this.name = trainingModel.name
+        this.obs = trainingModel.obs
+        this.id = trainingModel.id
+        this.weight = trainingModel.weight
+        this.repetition = trainingModel.repetition
+        this.series = trainingModel.series
+    }
 
 }
 

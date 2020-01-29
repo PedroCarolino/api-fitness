@@ -4,17 +4,17 @@ import javax.persistence.*
 
 @Entity
 @Table(name = "teacher", schema = "db_apifitness", catalog = "")
-open class TeacherEntity(id: Long?) {
+open class TeacherEntity() {
     @get:Id
     @get:Column(name = "id", nullable = false, insertable = false, updatable = false)
     @get:GeneratedValue(strategy = GenerationType.IDENTITY)
-    var id: Int? = null
+    var id: Long? = null
     @get:Basic
     @get:Column(name = "CREF", nullable = true)
     var CREF: String? = null
     @get:Basic
     @get:Column(name = "user_id", nullable = false)
-    var userId: Int? = null
+    var userId: Long? = null
 
     @get:ManyToOne(fetch = FetchType.LAZY)
     @get:JoinColumn(name = "user_id", referencedColumnName = "id", insertable = false,updatable = false)

@@ -12,7 +12,7 @@ open class StudentEntity () {
     var id: Int? = null
     @get:Basic
     @get:Column(name = "user_id", nullable = false)
-    var userId: Int? = null
+    var userId: Long? = null
 
     @get:OneToMany(mappedBy = "refStudentEntity")
     var refMedicalevaluationEntities: List<MedicalevaluationEntity>? = null
@@ -32,7 +32,7 @@ open class StudentEntity () {
                     "userId = $userId " +
                     ")"
 
-    constructor(userId: Int?) : this() {
+    constructor(userId: Long?) : this() {
         this.userId = userId
     }
 }

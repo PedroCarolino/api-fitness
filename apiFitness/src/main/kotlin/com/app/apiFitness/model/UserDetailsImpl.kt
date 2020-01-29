@@ -10,11 +10,11 @@ class UserDetailsImpl(private val user: UserRequestDTO) : UserDetails {
 
     override fun isEnabled() = true
 
-    override fun getUsername() =  user.email
+    override fun getUsername() =  user.user.email
 
     override fun isCredentialsNonExpired() = true
 
-    override fun getPassword() = user.password
+    override fun getPassword() = user.user.password
 
     override fun isAccountNonExpired() = true
 
