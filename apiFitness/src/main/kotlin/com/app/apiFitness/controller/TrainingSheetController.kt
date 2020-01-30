@@ -4,28 +4,28 @@ import com.app.apiFitness.constants.ReturnMessages
 import com.app.apiFitness.controller.dto.request.TrainingSheetCreateRequestDTO
 import com.app.apiFitness.controller.dto.response.StandardReturnDTO
 import com.app.apiFitness.exceptions.BusinessException
-import com.app.apiFitness.service.TrainingsheetServiceImpl
+import com.app.apiFitness.service.TrainingSheetService
+import com.app.apiFitness.service.TrainingSheetServiceImpl
 import org.apache.log4j.Logger
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 import java.net.URI
 
 @RestController
 @RequestMapping("/createSheet")
-class TrainingsheetController {
+class TrainingSheetController {
     private val logger = Logger.getLogger(javaClass)
     @Autowired
-    private lateinit var trainingsheetServiceImpl: TrainingsheetServiceImpl
+    private lateinit var trainingSheetServiceImpl: TrainingSheetServiceImpl
+    @Autowired
+    private lateinit var trainingSheetService: TrainingSheetService
 
     @PostMapping
-    fun signup(@RequestBody trainingSheetCreateRequestDTO: TrainingSheetCreateRequestDTO): ResponseEntity<StandardReturnDTO> {
+    fun createTrainingSheets(@RequestBody trainingSheetCreateRequestDTO: TrainingSheetCreateRequestDTO): ResponseEntity<StandardReturnDTO> {
         try {
-            trainingsheetServiceImpl.create(trainingSheetCreateRequestDTO)
+            trainingSheetServiceImpl.create(trainingSheetCreateRequestDTO)
         }
         catch (ex : BusinessException){
             logger.error(ex.message,ex)
@@ -37,5 +37,11 @@ class TrainingsheetController {
         }
 
         return ResponseEntity.created(URI("")).body(StandardReturnDTO(0,""))
+    }
+
+    @GetMapping
+    fun searchAllTrainingSheetsFromTeacher(@RequestParam id: Long?): Any {
+        val trainingSheetsList = trainingSheetService.searchAllTrainingSheets(id)
+        return trainingSheetsList
     }
 }

@@ -1,23 +1,15 @@
 package com.app.apiFitness.service
 
 import com.app.apiFitness.controller.dto.request.TrainingSheetCreateRequestDTO
-import com.app.apiFitness.controller.dto.request.UserRequestDTO
 import com.app.apiFitness.database.repository.*
 import com.app.apiFitness.database.repository.entity.*
-import com.app.apiFitness.exceptions.BusinessException
 import com.app.apiFitness.model.TrainingModel
 import com.app.apiFitness.model.TrainingSheetModel
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.beans.factory.annotation.Required
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Service
-import org.springframework.transaction.annotation.Propagation
-import org.springframework.transaction.annotation.Transactional
-import java.lang.RuntimeException
-import javax.persistence.NonUniqueResultException
 
 @Service
-class TrainingsheetServiceImpl {
+class TrainingSheetServiceImpl() : TrainingSheetService {
 
     @Autowired
     private lateinit var trainingsheetRepository: TrainingsheetRepository
@@ -28,13 +20,7 @@ class TrainingsheetServiceImpl {
     @Autowired
     private lateinit var trainingHasTrainingsheetRepository: TrainingHasTrainingsheetRepository
 
-    @Autowired
-    private lateinit var studentRepository: StudentRepository
-
-    @Autowired
-    private lateinit var bCryptPasswordEncoder: BCryptPasswordEncoder
-
-    fun create(trainingSheetDTO: TrainingSheetCreateRequestDTO) {
+    override fun create(trainingSheetDTO: TrainingSheetCreateRequestDTO) {
         val trainingSheetId =  createTrainingSheet(trainingSheetDTO.trainingSheetModel).id
         val trainingId =  createTraining(trainingSheetDTO.trainingModel).id
         createTrainingHasTrainingsheet(trainingSheetId,trainingId,"10")
@@ -55,4 +41,12 @@ class TrainingsheetServiceImpl {
         trainingHasTrainingsheetEntity.trainingSheetId = trainingSheetId
         return trainingHasTrainingsheetRepository.save(trainingHasTrainingsheetEntity)
     }
+
+    override fun searchAllTrainingSheets(id: Long?): Any {
+//        SELECT id_fichaTreino FROM fichaTreino WHERE professorId = 3
+
+
+    }
+
+
 }
