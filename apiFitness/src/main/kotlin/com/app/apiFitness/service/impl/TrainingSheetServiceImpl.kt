@@ -42,7 +42,7 @@ class TrainingSheetServiceImpl() : TrainingSheetService {
         return trainingHasTrainingsheetRepository.save(trainingHasTrainingsheetEntity)
     }
 
-    override fun searchAllTrainingSheets(id: Long?): Any {
+    override fun searchAllTrainingSheets(id: Long?) {
 //        SELECT id_fichaTreino FROM fichaTreino WHERE professorId = 3
 
 

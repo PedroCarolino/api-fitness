@@ -4,7 +4,7 @@ import javax.persistence.*
 
 @Entity
 @Table(name = "training_has_trainingsheet", schema = "db_apifitness", catalog = "")
-open class TrainingHasTrainingsheetEntity {
+open class  TrainingHasTrainingsheetEntity {
     @get:Id
     @get:Column(name = "id", nullable = false)
     @get:GeneratedValue(strategy = GenerationType.IDENTITY)

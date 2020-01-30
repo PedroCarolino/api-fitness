@@ -2,7 +2,7 @@ package com.app.apiFitness.controller
 
 import com.app.apiFitness.constants.ReturnMessages
 import com.app.apiFitness.controller.dto.request.TrainingSheetCreateRequestDTO
-import com.app.apiFitness.controller.dto.response.StandardReturnDTO
+import com.app.apiFitness.controller.dto.response.StandardResponseDTO
 import com.app.apiFitness.exceptions.BusinessException
 import com.app.apiFitness.service.TrainingSheetService
 import com.app.apiFitness.service.TrainingSheetServiceImpl
@@ -23,20 +23,20 @@ class TrainingSheetController {
     private lateinit var trainingSheetService: TrainingSheetService
 
     @PostMapping
-    fun createTrainingSheets(@RequestBody trainingSheetCreateRequestDTO: TrainingSheetCreateRequestDTO): ResponseEntity<StandardReturnDTO> {
+    fun createTrainingSheets(@RequestBody trainingSheetCreateRequestDTO: TrainingSheetCreateRequestDTO): ResponseEntity<StandardResponseDTO> {
         try {
             trainingSheetServiceImpl.create(trainingSheetCreateRequestDTO)
         }
         catch (ex : BusinessException){
             logger.error(ex.message,ex)
-            return ResponseEntity.unprocessableEntity().body(StandardReturnDTO(2,ex.message))
+            return ResponseEntity.unprocessableEntity().body(StandardResponseDTO(2,ex.message))
         }
         catch (ex : Exception){
             logger.error(ex.message,ex)
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(StandardReturnDTO(1, ReturnMessages.INTERNAL_SERVER_ERROR))
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(StandardResponseDTO(1, ReturnMessages.INTERNAL_SERVER_ERROR))
         }
 
-        return ResponseEntity.created(URI("")).body(StandardReturnDTO(0,""))
+        return ResponseEntity.created(URI("")).body(StandardResponseDTO(0,""))
     }
 
     @GetMapping

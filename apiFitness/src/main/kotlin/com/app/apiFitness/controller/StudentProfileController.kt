@@ -2,9 +2,8 @@ package com.app.apiFitness.controller
 
 import com.app.apiFitness.constants.ReturnMessages
 import com.app.apiFitness.controller.dto.request.UserRequestDTO
-import com.app.apiFitness.controller.dto.response.StandardReturnDTO
+import com.app.apiFitness.controller.dto.response.StandardResponseDTO
 import com.app.apiFitness.exceptions.BusinessException
-import com.app.apiFitness.service.StudentProfileService
 import com.app.apiFitness.service.StudentProfileServiceImpl
 import org.apache.log4j.Logger
 import org.springframework.beans.factory.annotation.Autowired
@@ -24,20 +23,20 @@ class StudentProfileController {
     private lateinit var studentProfileService: StudentProfileServiceImpl
 
     @PostMapping
-    fun signup(@RequestBody user: UserRequestDTO): ResponseEntity<StandardReturnDTO> {
+    fun signup(@RequestBody user: UserRequestDTO): ResponseEntity<StandardResponseDTO> {
         try {
             logger.info("Teste")
             studentProfileService.create(user)
         }
         catch (ex : BusinessException){
             logger.error(ex.message,ex)
-            return ResponseEntity.unprocessableEntity().body(StandardReturnDTO(2,ex.message))
+            return ResponseEntity.unprocessableEntity().body(StandardResponseDTO(2,ex.message))
         }
         catch (ex : Exception){
             logger.error(ex.message,ex)
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(StandardReturnDTO(1, ReturnMessages.INTERNAL_SERVER_ERROR))
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(StandardResponseDTO(1, ReturnMessages.INTERNAL_SERVER_ERROR))
         }
 
-        return ResponseEntity.created(URI("")).body(StandardReturnDTO(0,""))
+        return ResponseEntity.created(URI("")).body(StandardResponseDTO(0,""))
     }
 }

@@ -1,8 +1,7 @@
 package com.app.apiFitness.controller
 
 import com.app.apiFitness.controller.dto.request.UserRequestDTO
-import com.app.apiFitness.controller.dto.response.StandardReturnDTO
-import com.app.apiFitness.model.Credentials
+import com.app.apiFitness.controller.dto.response.StandardResponseDTO
 import com.app.apiFitness.service.UserService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
@@ -20,8 +19,8 @@ class SignupController {
     private lateinit var userService: UserService
 
     @PostMapping
-    fun signup(@RequestBody user: UserRequestDTO): ResponseEntity<StandardReturnDTO> {
+    fun signup(@RequestBody user: UserRequestDTO): ResponseEntity<StandardResponseDTO> {
         val userCreated = userService.create(user)
-        return ResponseEntity.created(URI("")).body(StandardReturnDTO(0,""))
+        return ResponseEntity.created(URI("")).body(StandardResponseDTO(0,""))
     }
 }

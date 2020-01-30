@@ -6,7 +6,7 @@ import javax.persistence.*
 
 @Entity
 @Table(name = "training", schema = "db_apifitness", catalog = "")
-open class TrainingEntity (){
+    open class  TrainingEntity (){
     @get:Id
     @get:Column(name = "id", nullable = false, insertable = false, updatable = false)
     @get:GeneratedValue(strategy = GenerationType.IDENTITY)
