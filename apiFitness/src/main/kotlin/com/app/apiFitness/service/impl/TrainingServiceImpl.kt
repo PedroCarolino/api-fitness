@@ -46,12 +46,12 @@ class TrainingServiceImpl {
         return trainingRepository.save(trainingEntity)
     }
 
-    private fun createTrainingHasTrainingsheet(trainingSheetId: Int?,trainingId: Int?,orderTraining: String?):TrainingHasTrainingsheetEntity {
+    private fun createTrainingHasTrainingsheet(trainingSheetId: Int?,trainingId: Int?,orderTraining: String?) {
         var trainingHasTrainingsheetEntity = TrainingHasTrainingsheetEntity();
         trainingHasTrainingsheetEntity.orderTraining = orderTraining
         trainingHasTrainingsheetEntity.trainingId = trainingId
         trainingHasTrainingsheetEntity.trainingSheetId = trainingSheetId
-        return trainingHasTrainingsheetRepository.save(trainingHasTrainingsheetEntity)
+        trainingHasTrainingsheetRepository.save(trainingHasTrainingsheetEntity)
     }
 
     fun change(trainingChangeRequestDTO: TrainingChangeRequestDTO) {
