@@ -58,13 +58,13 @@ class TrainingServiceImpl {
         createTraining(trainingChangeRequestDTO.trainingModel)
     }
 
-    fun search(trainingSearchRequestDTO : TrainingSearchRequestDTO): MutableList<TrainingEntity>?{
+    fun search(trainingSearchRequestDTO : TrainingSearchRequestDTO): List<TrainingModel>?{
 
         return unproxyTrainingList(trainingHasTrainingsheetRepository.findAllByTrainingSheetId(trainingSearchRequestDTO.trainingSheetId))
     }
 
-    private fun unproxyTrainingList(trainingHasTrainingSheets: List<TrainingHasTrainingsheetEntity>): MutableList<TrainingEntity>? {
-        return trainingHasTrainingSheets.stream().map { x -> Hibernate.unproxy(x.refTrainingEntity,TrainingEntity::class.java) }.collect(Collectors.toList());
+    private fun unproxyTrainingList(trainingHasTrainingSheets: List<TrainingHasTrainingsheetEntity>): List<TrainingModel>? {
+        return trainingHasTrainingSheets.stream().map { x ->  TrainingModel( Hibernate.unproxy(x.refTrainingEntity,TrainingEntity::class.java)) }.collect(Collectors.toList());
     }
 
 }
