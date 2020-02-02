@@ -46,10 +46,10 @@ class TrainingServiceImpl {
         return trainingRepository.save(trainingEntity)
     }
 
-    private fun createTrainingHasTrainingsheet(trainingSheetId: Int?,trainingId: Int?,orderTraining: String?) {
+    private fun createTrainingHasTrainingsheet(trainingSheetId: Int?,trainingId: Long?,orderTraining: String?) {
         var trainingHasTrainingsheetEntity = TrainingHasTrainingsheetEntity();
         trainingHasTrainingsheetEntity.orderTraining = orderTraining
-        trainingHasTrainingsheetEntity.trainingId = trainingId
+        trainingHasTrainingsheetEntity.trainingId = trainingId?.toInt()
         trainingHasTrainingsheetEntity.trainingSheetId = trainingSheetId
         trainingHasTrainingsheetRepository.save(trainingHasTrainingsheetEntity)
     }
@@ -63,6 +63,10 @@ class TrainingServiceImpl {
         return unproxyTrainingList(trainingHasTrainingsheetRepository.findAllByTrainingSheetId(trainingSearchRequestDTO.trainingSheetId))
     }
 
+    fun deleteTraining(id :Long) {
+
+        trainingRepository.deleteById(id)
+    }
     private fun unproxyTrainingList(trainingHasTrainingSheets: List<TrainingHasTrainingsheetEntity>): List<TrainingModel>? {
         return trainingHasTrainingSheets.stream().map { x ->  TrainingModel( Hibernate.unproxy(x.refTrainingEntity,TrainingEntity::class.java)) }.collect(Collectors.toList());
     }

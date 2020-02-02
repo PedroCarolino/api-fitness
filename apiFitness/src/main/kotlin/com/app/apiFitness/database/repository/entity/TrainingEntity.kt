@@ -10,7 +10,7 @@ import javax.persistence.*
     @get:Id
     @get:Column(name = "id", nullable = false, insertable = false, updatable = false)
     @get:GeneratedValue(strategy = GenerationType.IDENTITY)
-    var id: Int? = null
+    var id: Long? = null
     @get:Basic
     @get:Column(name = "name", nullable = true)
     var name: String? = null
@@ -45,7 +45,7 @@ import javax.persistence.*
     @get:ManyToOne(fetch = FetchType.LAZY)
     @get:JoinColumn(name = "machine_id", referencedColumnName = "id", insertable = false,updatable = false)
     var refMachineEntity: MachineEntity? = null
-    @get:OneToMany(mappedBy = "refTrainingEntity")
+    @get:OneToMany(mappedBy = "refTrainingEntity",cascade = [(javax.persistence.CascadeType.REMOVE)])
     var refTrainingHasTrainingsheetEntities: List<TrainingHasTrainingsheetEntity>? = null
 
     override fun toString(): String =
@@ -69,7 +69,7 @@ import javax.persistence.*
         this.modality = trainingModel.modality
         this.name = trainingModel.name
         this.obs = trainingModel.obs
-        this.id = trainingModel.id
+        this.id = trainingModel.id?.toLong()
         this.weight = trainingModel.weight
         this.repetition = trainingModel.repetition
         this.series = trainingModel.series

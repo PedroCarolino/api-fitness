@@ -6,7 +6,7 @@ import javax.persistence.*
 @Table(name = "teacher_has_student", schema = "db_apifitness", catalog = "")
 open class TeacherHasStudentEntity {
     @get:Id
-    @get:Column(name = "id", nullable = false)
+    @get:Column(name = "id", nullable = true)
     @get:GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Int? = null
     @get:Basic
@@ -16,13 +16,13 @@ open class TeacherHasStudentEntity {
     @get:Column(name = "student_id", nullable = false)
     var studentId: Int? = null
 
-    @get:ManyToOne(fetch = FetchType.LAZY)
-    @get:JoinColumn(name = "teacher_id", referencedColumnName = "teacher_has_student_teacher_id", insertable = false,updatable = false)
-    var refAppointmentEntity: AppointmentEntity? = null
+    @get:OneToMany(mappedBy = "refTeacherHasStudentEntity")
+    var refAppointmentEntities: List<AppointmentEntity>? = null
+
     @get:ManyToOne(fetch = FetchType.LAZY)
     @get:JoinColumn(name = "teacher_id", referencedColumnName = "id",insertable = false, updatable = false)
     var refTeacherEntity: TeacherEntity? = null
-    @get:ManyToOne(fetch = FetchType.LAZY)
+    @get:ManyToOne(fetch = FetchType.LAZY, optional = false)
     @get:JoinColumn(name = "student_id", referencedColumnName = "id", insertable = false,updatable = false)
     var refStudentEntity: StudentEntity? = null
 

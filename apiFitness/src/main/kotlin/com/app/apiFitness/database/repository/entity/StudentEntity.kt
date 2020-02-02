@@ -18,7 +18,7 @@ open class StudentEntity () {
     var refMedicalevaluationEntities: List<MedicalevaluationEntity>? = null
     @get:OneToMany(mappedBy = "refStudentEntity")
     var refNutritionEntities: List<NutritionEntity>? = null
-    @get:ManyToOne(fetch = FetchType.LAZY)
+    @get:OneToOne(fetch = FetchType.LAZY)
     @get:JoinColumn(name = "user_id", referencedColumnName = "id", insertable = false,updatable = false)
     var refUserEntity: UserEntity? = null
     @get:OneToMany(mappedBy = "refStudentEntity")

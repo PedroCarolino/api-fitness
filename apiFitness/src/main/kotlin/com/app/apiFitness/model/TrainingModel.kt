@@ -23,7 +23,7 @@ data class TrainingModel(
         this.modality = trainingEntity.modality
         this.name = trainingEntity.name
         this.obs = trainingEntity.obs
-        this.id = trainingEntity.id
+        this.id = trainingEntity.id?.toInt()
         this.weight = trainingEntity.weight
         this.repetition = trainingEntity.repetition
         this.series = trainingEntity.series

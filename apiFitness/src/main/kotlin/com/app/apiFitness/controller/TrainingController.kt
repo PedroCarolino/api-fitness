@@ -12,10 +12,7 @@ import org.apache.log4j.Logger
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 import java.net.URI
 
 @RestController
@@ -79,5 +76,22 @@ class TrainingController {
         retorno.cdReturn = 0
         retorno.dsReturn = ""
         return ResponseEntity.created(URI("")).body(retorno)
+    }
+
+    @DeleteMapping(value = ["/{id}"])
+    fun deleteTraining(@PathVariable  id: Long): ResponseEntity<StandardResponseDTO> {
+        try {
+            trainingServiceImpl.deleteTraining(id)
+        }
+        catch (ex : BusinessException){
+            logger.error(ex.message,ex)
+            return ResponseEntity.unprocessableEntity().body(StandardResponseDTO(2,ex.message))
+        }
+        catch (ex : Exception){
+            logger.error(ex.message,ex)
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(StandardResponseDTO(1, ReturnMessages.INTERNAL_SERVER_ERROR))
+        }
+
+        return ResponseEntity.created(URI("")).body(StandardResponseDTO(0,""))
     }
 }

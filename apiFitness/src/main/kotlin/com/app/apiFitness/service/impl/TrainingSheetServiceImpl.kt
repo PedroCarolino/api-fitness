@@ -34,10 +34,10 @@ class TrainingSheetServiceImpl() : TrainingSheetService {
         return trainingRepository.save(trainingEntity)
     }
 
-    private fun createTrainingHasTrainingsheet(trainingSheetId: Int?,trainingId: Int?,orderTraining: String?):TrainingHasTrainingsheetEntity {
+    private fun createTrainingHasTrainingsheet(trainingSheetId: Int?,trainingId: Long?,orderTraining: String?):TrainingHasTrainingsheetEntity {
         var trainingHasTrainingsheetEntity = TrainingHasTrainingsheetEntity();
         trainingHasTrainingsheetEntity.orderTraining = orderTraining
-        trainingHasTrainingsheetEntity.trainingId = trainingId
+        trainingHasTrainingsheetEntity.trainingId = trainingId?.toInt()
         trainingHasTrainingsheetEntity.trainingSheetId = trainingSheetId
         return trainingHasTrainingsheetRepository.save(trainingHasTrainingsheetEntity)
     }

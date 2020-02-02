@@ -51,7 +51,7 @@ class TrainingServiceTest {
         var trainingEntity2 = TrainingEntity(request.trainingModel)
         var trTrainingHasTrainingsheetEntity = TrainingHasTrainingsheetEntity()
         trTrainingHasTrainingsheetEntity.orderTraining = "10"
-        trTrainingHasTrainingsheetEntity.trainingId = trainingEntity.id
+        trTrainingHasTrainingsheetEntity.trainingId = trainingEntity.id!!.toInt()
         trTrainingHasTrainingsheetEntity.trainingSheetId = request.trainingSheetId
         trainingEntity.id = 10
         whenever(trainingRepository.save(refEq(trainingEntity2))).thenReturn(trainingEntity)

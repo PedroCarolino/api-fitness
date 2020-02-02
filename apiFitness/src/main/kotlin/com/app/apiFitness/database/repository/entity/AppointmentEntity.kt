@@ -16,8 +16,9 @@ open class AppointmentEntity {
     @get:Column(name = "teacher_has_student_teacher_id", nullable = false)
     var teacherHasStudentTeacherId: Int? = null
 
-    @get:OneToMany(mappedBy = "refAppointmentEntity")
-    var refTeacherHasStudentEntities: List<TeacherHasStudentEntity>? = null
+    @get:ManyToOne(fetch = FetchType.LAZY)
+    @get:JoinColumn(name = "teacher_has_student_teacher_id", referencedColumnName = "id", insertable = false,updatable = false)
+    var refTeacherHasStudentEntity: TeacherHasStudentEntity? = null
 
     override fun toString(): String =
             "Entity of type: ${javaClass.name} ( " +

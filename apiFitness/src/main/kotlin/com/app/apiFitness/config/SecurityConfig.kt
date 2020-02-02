@@ -30,6 +30,7 @@ class SecurityConfig: WebSecurityConfigurerAdapter() {
         http.csrf().disable().authorizeRequests()
                 .antMatchers(HttpMethod.POST).permitAll()
                 .antMatchers(HttpMethod.GET).permitAll()
+                .antMatchers(HttpMethod.DELETE).permitAll()
                 .anyRequest().authenticated()
 
         http.addFilter(JWTAuthenticationFilter(authenticationManager(), jwtUtil = jwtUtil))

@@ -44,10 +44,10 @@ open class UserEntity (){
 
     @get:OneToMany(mappedBy = "refUserEntity")
     var refGymHasUserEntities: List<GymHasUserEntity>? = null
-    @get:OneToMany(mappedBy = "refUserEntity")
-    var refStudentEntities: List<StudentEntity>? = null
-    @get:OneToMany(mappedBy = "refUserEntity")
-    var refTeacherEntities: List<TeacherEntity>? = null
+    @get:OneToOne(mappedBy = "refUserEntity")
+    var refStudentEntities: StudentEntity? = null
+    @get:OneToOne(mappedBy = "refUserEntity")
+    var refTeacherEntities: TeacherEntity? = null
 
     override fun toString(): String =
             "Entity of type: ${javaClass.name} ( " +

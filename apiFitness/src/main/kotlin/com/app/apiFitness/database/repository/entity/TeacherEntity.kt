@@ -16,7 +16,7 @@ open class TeacherEntity() {
     @get:Column(name = "user_id", nullable = false)
     var userId: Long? = null
 
-    @get:ManyToOne(fetch = FetchType.LAZY)
+    @get:OneToOne(fetch = FetchType.LAZY)
     @get:JoinColumn(name = "user_id", referencedColumnName = "id", insertable = false,updatable = false)
     var refUserEntity: UserEntity? = null
     @get:OneToMany(mappedBy = "refTeacherEntity")
