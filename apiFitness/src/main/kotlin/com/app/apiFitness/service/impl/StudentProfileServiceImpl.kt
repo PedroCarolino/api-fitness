@@ -1,5 +1,6 @@
 package com.app.apiFitness.service
 
+import com.app.apiFitness.constants.BusinessExceptionMessages
 import com.app.apiFitness.controller.dto.request.UserRequestDTO
 import com.app.apiFitness.database.repository.StudentRepository
 import com.app.apiFitness.database.repository.TeacherRepository
@@ -50,7 +51,7 @@ class StudentProfileServiceImpl {
     private fun consultarEmail(userEmail: String) {
         var user = userRepository.findByEmail(userEmail)
         if (user != null){
-            throw BusinessException("O email passado já está sendo utilizado")
+            throw BusinessException(BusinessExceptionMessages.EMAIL_JA_UTILIZADO)
         }
     }
 }
