@@ -14,3 +14,7 @@ spring:
 
 jwt:
     secret: secret
+
+health:
+    config:
+        enabled: false
