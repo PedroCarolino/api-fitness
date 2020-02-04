@@ -1,0 +1,16 @@
+spring:
+    profiles: local
+    application:
+        name: apiFitness
+    datasource:
+        url: jdbc:mysql://localhost:3306/db_apifitness?useTimezone=true&serverTimezone=UTC
+        username: pedro
+        password: PC140497
+        driver-class-name: com.mysql.jdbc.Driver
+    jpa:
+        hibernate.ddl-auto: update
+        generate-ddl: true
+        show-sql: true
+
+jwt:
+    secret: secret
