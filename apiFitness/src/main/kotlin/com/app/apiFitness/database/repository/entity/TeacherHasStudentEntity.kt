@@ -22,7 +22,7 @@ open class TeacherHasStudentEntity {
     @get:ManyToOne(fetch = FetchType.LAZY)
     @get:JoinColumn(name = "teacher_id", referencedColumnName = "id",insertable = false, updatable = false)
     var refTeacherEntity: TeacherEntity? = null
-    @get:ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @get:ManyToOne(fetch = FetchType.LAZY)
     @get:JoinColumn(name = "student_id", referencedColumnName = "id", insertable = false,updatable = false)
     var refStudentEntity: StudentEntity? = null
 

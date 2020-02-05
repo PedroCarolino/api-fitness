@@ -10,7 +10,7 @@ open class TrainingsheetEntity () {
     @get:Id
     @get:Column(name = "id", nullable = false, insertable = false, updatable = false)
     @get:GeneratedValue(strategy = GenerationType.IDENTITY)
-    var id: Int? = null
+    var id: Long? = null
     @get:Basic
     @get:Column(name = "dateStart", nullable = true)
     var dateStart: java.sql.Date? = null
@@ -22,7 +22,7 @@ open class TrainingsheetEntity () {
     var description: String? = null
     @get:Basic
     @get:Column(name = "name", nullable = true)
-    var name: String? = null
+    var name: String = ""
     @get:Basic
     @get:Column(name = "objective", nullable = true)
     var objective: String? = null
@@ -61,6 +61,7 @@ open class TrainingsheetEntity () {
         this.objective = trainingSheetModel.objective
         this.studentId = trainingSheetModel.studentId
         this.teacherId = trainingSheetModel.teacherId
+        this.id = trainingSheetModel.id
     }
 }
 

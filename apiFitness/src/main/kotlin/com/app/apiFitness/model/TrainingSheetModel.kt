@@ -2,7 +2,7 @@ package com.app.apiFitness.model
 
 data class TrainingSheetModel (
         val id: Long? = null,
-        val name: String? = null,
+        val name: String = "",
         val description: String? = null,
         val objective: String? = null,
         val studentId: Int? = null,

@@ -1,8 +1,11 @@
 package com.app.apiFitness.service
 
+import com.app.apiFitness.constants.BusinessExceptionMessages
+import com.app.apiFitness.controller.dto.request.ChangeTrainingSheetRequestDTO
 import com.app.apiFitness.controller.dto.request.TrainingSheetCreateRequestDTO
 import com.app.apiFitness.database.repository.*
 import com.app.apiFitness.database.repository.entity.*
+import com.app.apiFitness.exceptions.BusinessException
 import com.app.apiFitness.model.TrainingModel
 import com.app.apiFitness.model.TrainingSheetModel
 import org.springframework.beans.factory.annotation.Autowired
@@ -21,11 +24,15 @@ class TrainingSheetServiceImpl() : TrainingSheetService {
     private lateinit var trainingHasTrainingsheetRepository: TrainingHasTrainingsheetRepository
 
     override fun create(trainingSheetDTO: TrainingSheetCreateRequestDTO) {
-        val trainingSheetId =  createTrainingSheet(trainingSheetDTO.trainingSheetModel).id
-        val trainingId =  createTraining(trainingSheetDTO.trainingModel).id
-        createTrainingHasTrainingsheet(trainingSheetId,trainingId,"10")
+        if(trainingsheetRepository.findByName(trainingSheetDTO.trainingSheetModel.name) != null){
+            saveTrainingSheet(trainingSheetDTO.trainingSheetModel)
+        }
+        else{
+            throw BusinessException(BusinessExceptionMessages.NOME_FICHA_UTILIZADO)
+        }
+
     }
-    private fun createTrainingSheet(trainingSheet: TrainingSheetModel) :TrainingsheetEntity{
+    private fun saveTrainingSheet(trainingSheet: TrainingSheetModel) :TrainingsheetEntity{
         var trainingsheetEntity = TrainingsheetEntity(trainingSheet);
         return trainingsheetRepository.save(trainingsheetEntity)
     }
@@ -48,5 +55,8 @@ class TrainingSheetServiceImpl() : TrainingSheetService {
 
     }
 
+    override fun change(changeTrainingSheetRequestDTO: ChangeTrainingSheetRequestDTO) {
+            saveTrainingSheet(changeTrainingSheetRequestDTO.trainingSheetModel)
+    }
 
 }
