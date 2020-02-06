@@ -1,9 +1,13 @@
 package com.app.apiFitness.repository.entity
 
 import com.app.apiFitness.constants.enums.UserStatusEnum
+import lombok.Getter
+import lombok.Setter
 import javax.persistence.*
 
 @Entity
+@Getter
+@Setter
 @Table(name = "user")
 data class UserEntity (
         @Id
@@ -29,9 +33,9 @@ data class UserEntity (
         val telephone: Int? = null,
         @Column
         @Enumerated(EnumType.STRING)
-        var role: UserStatusEnum? = null
-//        @OneToOne(mappedBy = "refUserEntity")
-//        var refStudentEntities: StudentEntity? = null,
-//        @OneToOne(mappedBy = "refUserEntity")
-//        var refTeacherEntities: TeacherEntity? = null
+        var role: UserStatusEnum? = null,
+        @OneToOne(mappedBy = "refUserEntity", fetch = FetchType.EAGER, cascade = [(CascadeType.ALL)])
+        var refStudentEntities: StudentEntity? = null,
+        @OneToOne(mappedBy = "refUserEntity", fetch = FetchType.EAGER, cascade = [(CascadeType.ALL)])
+        var refTeacherEntities: TeacherEntity? = null
 )
