@@ -19,5 +19,8 @@ data class StudentEntity (
     @OneToMany(mappedBy = "refStudentEntity", fetch = FetchType.LAZY, cascade = [(CascadeType.ALL)])
     var refNutritionEntities: List<NutritionEntity>? = null,
     @OneToMany(mappedBy = "refStudentEntity", fetch = FetchType.LAZY, cascade = [(CascadeType.ALL)])
-    var refMedicalEvaluationEntities: List<MedicalEvaluationEntity>? = null
+    var refMedicalEvaluationEntities: List<MedicalEvaluationEntity>? = null,
+    @OneToMany(mappedBy = "refStudentEntity", fetch = FetchType.LAZY, cascade = [(CascadeType.ALL)])
+    var refTrainingSheetEntities: List<TrainingSheetEntity>? = null
+
 )

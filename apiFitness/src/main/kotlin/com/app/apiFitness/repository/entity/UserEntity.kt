@@ -37,5 +37,7 @@ data class UserEntity (
         @OneToOne(mappedBy = "refUserEntity", fetch = FetchType.EAGER, cascade = [(CascadeType.ALL)])
         var refStudentEntities: StudentEntity? = null,
         @OneToOne(mappedBy = "refUserEntity", fetch = FetchType.EAGER, cascade = [(CascadeType.ALL)])
-        var refTeacherEntities: TeacherEntity? = null
+        var refTeacherEntities: TeacherEntity? = null,
+        @OneToMany(mappedBy = "refUserEntity", fetch = FetchType.LAZY, cascade = [(CascadeType.ALL)])
+        var refGymHasUserEntities: List<GymHasUserEntity>? = null
 )
