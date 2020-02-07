@@ -13,7 +13,8 @@ data class TeacherEntity (
     val id: Int? = null,
     @Column(name = "CREF")
     val CREF: String? = null,
-    @OneToOne(mappedBy = "user_id")
+    @OneToOne(cascade = [(CascadeType.ALL)])
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     var refUserEntity: UserEntity? = null,
     @OneToMany(mappedBy = "refTeacherEntity", fetch = FetchType.LAZY, cascade = [(CascadeType.ALL)])
     var refTeacherHasStudentEntities: List<TeacherHasStudentEntity>? = null,

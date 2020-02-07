@@ -19,5 +19,5 @@ data class TeacherHasStudentEntity (
     @JoinColumn(name="student_id", referencedColumnName = "id")
     var refStudentEntity: StudentEntity? = null,
     @OneToMany(mappedBy = "refTeacherHasStudentEntity", fetch = FetchType.LAZY, cascade = [(CascadeType.ALL)])
-    var refAppointmentEntities: List<TeacherHasStudentEntity>? = null
+    var refAppointmentEntities: List<AppointmentEntity>? = null
 )

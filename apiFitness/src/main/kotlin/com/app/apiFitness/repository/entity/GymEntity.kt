@@ -14,8 +14,8 @@ data class GymEntity (
         val id: Long? = null,
         @Column(name = "name")
         val name: String? = null,
-        @Column(name = "name")
-        val numberSerie: Int? = null,
+        @Column(name = "numberSeries")
+        val numberSeries: Int? = null,
         @OneToMany(mappedBy = "refGymEntity", fetch = FetchType.LAZY, cascade = [(CascadeType.ALL)])
         var refGymHasUserEntities: List<GymHasUserEntity>? = null,
         @OneToMany(mappedBy = "refGymEntity", fetch = FetchType.LAZY, cascade = [(CascadeType.ALL)])

@@ -12,7 +12,8 @@ data class StudentEntity (
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Int? = null,
-    @OneToOne(mappedBy = "user_id")
+    @OneToOne(cascade = [(CascadeType.ALL)])
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     var refUserEntity: UserEntity? = null,
     @OneToMany(mappedBy = "refStudentEntity", fetch = FetchType.LAZY, cascade = [(CascadeType.ALL)])
     var refTeacherHasStudentEntities: List<TeacherHasStudentEntity>? = null,
