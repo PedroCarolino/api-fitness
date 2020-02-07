@@ -24,7 +24,7 @@ data class TrainingSheetEntity (
         @Column(name = "objective")
         val objective: String? = null,
         @OneToMany(mappedBy = "refTrainingSheetEntity", fetch = FetchType.LAZY, cascade = [(CascadeType.ALL)])
-        var refTrainingHasTrainingsheetEntities: List<TrainingHasTrainingsheetEntity>? = null,
+        var refTrainingHasTrainingSheetEntities: List<TrainingHasTrainingSheetEntity>? = null,
         @ManyToOne(cascade = [(CascadeType.ALL)])
         @JoinColumn(name="student_id", referencedColumnName = "id")
         var refStudentEntity: StudentEntity? = null,
