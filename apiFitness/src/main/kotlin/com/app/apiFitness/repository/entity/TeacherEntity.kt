@@ -7,12 +7,14 @@ import javax.persistence.*
 @Getter
 @Setter
 @Table(name = "teacher")
-data class TeacherEntity (
+open class TeacherEntity (
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Int? = null,
+    var id: Int? = null,
     @Column(name = "CREF")
-    val CREF: String? = null,
+    var CREF: String? = null,
+    @Column(name = "user_id", nullable = false)
+    var userId: Int? = null,
     @OneToOne(cascade = [(CascadeType.ALL)])
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     var refUserEntity: UserEntity? = null,

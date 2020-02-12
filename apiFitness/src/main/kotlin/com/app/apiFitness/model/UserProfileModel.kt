@@ -4,7 +4,7 @@ import com.app.apiFitness.constants.enums.UserStatusEnum
 import com.app.apiFitness.repository.entity.UserEntity
 
 data class UserProfileModel (
-        var id: Long? = null,
+        var id: Int? = null,
         var name: String? = null,
         var nickname: String? = null,
         var email: String = "",

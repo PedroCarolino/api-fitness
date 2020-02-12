@@ -19,7 +19,9 @@ class UserServiceImpl @Autowired constructor(
     }
 
     override fun createUser(userProfileRequestDTO: UserProfileRequestDTO): UserEntity {
-        val userEntity = UserEntity(userProfileRequestDTO.user.id)
+        val userEntity = UserEntity(userProfileRequestDTO.user.id,
+                userProfileRequestDTO.user.email,
+                userProfileRequestDTO.user.password)
         return userRepository.save(userEntity)
     }
 }
