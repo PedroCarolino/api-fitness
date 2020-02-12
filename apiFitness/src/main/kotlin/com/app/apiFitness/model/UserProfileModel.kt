@@ -1,5 +1,6 @@
 package com.app.apiFitness.model
 
+import com.app.apiFitness.constants.enums.UserStatusEnum
 import com.app.apiFitness.repository.entity.UserEntity
 
 data class UserProfileModel (
@@ -9,6 +10,7 @@ data class UserProfileModel (
         var email: String = "",
         var password: String? = null,
         var gender: String? = null,
+        var role: UserStatusEnum? = null,
         var age: Long? = null,
         var zipCode: Long? = null,
         var telephone: Long? = null,
@@ -20,6 +22,7 @@ data class UserProfileModel (
         this.email = user.email.toString()
         this.gender = user.gender
         this.id = user.id
+        this.role = user.role
         this.name = user.name
         this.nickname = user.nickname
         this.password = user.password

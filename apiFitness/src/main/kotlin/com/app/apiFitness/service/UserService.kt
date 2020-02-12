@@ -1,6 +1,6 @@
 package com.app.apiFitness.service
 
-import com.app.apiFitness.controller.dto.UserProfileRequestDTO
+import com.app.apiFitness.controller.dto.request.UserProfileRequestDTO
 import com.app.apiFitness.repository.entity.UserEntity
 
 

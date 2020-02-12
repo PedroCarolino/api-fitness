@@ -1,4 +1,4 @@
-package com.app.apiFitness.controller.dto
+package com.app.apiFitness.controller.dto.request
 
 import com.app.apiFitness.model.UserProfileModel
 
