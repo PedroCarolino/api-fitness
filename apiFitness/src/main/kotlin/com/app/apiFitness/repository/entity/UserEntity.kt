@@ -9,7 +9,7 @@ import javax.persistence.*
 @Getter
 @Setter
 @Table(name = "user")
-data class UserEntity (
+data class UserEntity(
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         val id: Int? = null,
