@@ -4,10 +4,8 @@ import lombok.*
 import javax.persistence.*
 
 @Entity
-@Getter
-@Setter
 @Table(name = "teacher")
-open class TeacherEntity (
+data class TeacherEntity (
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Int? = null,
@@ -16,7 +14,7 @@ open class TeacherEntity (
     @Column(name = "user_id", nullable = false)
     var userId: Int? = null,
     @OneToOne(cascade = [(CascadeType.ALL)])
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @JoinColumn(name = "user_id", referencedColumnName = "id", insertable = false, updatable = false)
     var refUserEntity: UserEntity? = null,
     @OneToMany(mappedBy = "refTeacherEntity", fetch = FetchType.LAZY, cascade = [(CascadeType.ALL)])
     var refTeacherHasStudentEntities: List<TeacherHasStudentEntity>? = null,

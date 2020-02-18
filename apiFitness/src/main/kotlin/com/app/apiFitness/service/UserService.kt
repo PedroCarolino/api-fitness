@@ -8,9 +8,9 @@ import com.app.apiFitness.repository.entity.UserEntity
 
 
 interface UserService {
-    fun create(userProfileRequestDTO: UserProfileRequestDTO)
     fun createUser(userProfileRequestDTO: UserProfileRequestDTO): UserEntity
     fun createTeacher(teacherProfileRequestDTO: TeacherProfileRequestDTO)
     fun verifyIfEmailIsValid(email: String): Boolean
+    fun createStudent(userProfileRequestDTO: UserProfileRequestDTO)
 
 }
