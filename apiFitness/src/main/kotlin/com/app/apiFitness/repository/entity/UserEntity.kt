@@ -1,6 +1,7 @@
 package com.app.apiFitness.repository.entity
 
 import com.app.apiFitness.constants.enums.UserStatusEnum
+import com.app.apiFitness.model.UserProfileModel
 import lombok.Getter
 import lombok.Setter
 import javax.persistence.*
@@ -9,28 +10,28 @@ import javax.persistence.*
 @Getter
 @Setter
 @Table(name = "user")
-data class UserEntity(
+data class UserEntity (
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-        val id: Int? = null,
+        var id: Int? = null,
         @Column(name = "name")
-        val name: String? = null,
+        var name: String? = null,
         @Column(name = "nickname")
-        val nickname: String? = null,
+        var nickname: String? = null,
         @Column(name = "email")
-        val email: String? = null,
+        var email: String? = null,
         @Column(name = "address")
-        val address: String? = null,
+        var address: String? = null,
         @Column(name = "password")
-        val password: String? = null,
+        var password: String? = null,
         @Column(name = "gender")
-        val gender: String? = null,
+        var gender: String? = null,
         @Column(name = "age")
-        val age: Int? = null,
+        var age: Int? = null,
         @Column(name = "zipCode")
-        val zipCode: Int? = null,
+        var zipCode: Int? = null,
         @Column(name = "telephone")
-        val telephone: Int? = null,
+        var telephone: Int? = null,
         @Column
         @Enumerated(EnumType.STRING)
         var role: UserStatusEnum? = null,

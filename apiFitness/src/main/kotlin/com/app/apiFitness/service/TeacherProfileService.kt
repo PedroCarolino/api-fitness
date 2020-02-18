@@ -9,7 +9,5 @@ interface TeacherProfileService {
     fun verifyIfEmailIsValid(email: String): Boolean
     fun createUser(teacherProfileRequestDTO: TeacherProfileRequestDTO) : UserEntity
     fun createTeacher(userId: Int?,CREF: String?) : TeacherEntity
-//    fun searchTeacherStudents(searchTeacherStudentsRequestDTO: SearchTeacherStudentsRequestDTO): List<UserProfileModel>?
-//    fun createTeacherHasStudent(createTeacherHasStudentRequestDTO: CreateTeacherHasStudentRequestDTO)
 
 }

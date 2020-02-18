@@ -15,8 +15,6 @@ class TeacherProfileServiceImpl @Autowired constructor(
         private val teacherRepository: TeacherRepository): TeacherProfileService {
 
     override fun create(teacherProfileRequestDTO: TeacherProfileRequestDTO) {
-
-
     }
 
     override fun verifyIfEmailIsValid(email: String): Boolean {

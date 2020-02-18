@@ -18,20 +18,10 @@ import java.net.URI
 class UserController @Autowired constructor(private val userService: UserService,
                                             private val teacherService: UserService) {
 
-    @PostMapping(value = ["/createUser"])
-    fun createUserProfile(@RequestBody userProfileRequestDTO: UserProfileRequestDTO): ResponseEntity<StandardResponseDTO>{
-        try {
-            userService.create(userProfileRequestDTO)
-        } catch (ex : Exception){
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(StandardResponseDTO(1, "500"))
-        }
-        return ResponseEntity.created(URI("")).body(StandardResponseDTO(0,"200"))
-    }
-
     @PostMapping(value=["/Teacher"])
     fun createTeacherProfile(@RequestBody teacherProfileRequestDTO: TeacherProfileRequestDTO): ResponseEntity<StandardResponseDTO> {
         try {
-            teacherService.create(teacherProfileRequestDTO)
+            teacherService.createTeacher(teacherProfileRequestDTO)
         } catch (ex : Exception){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(StandardResponseDTO(1, "500"))
         }
