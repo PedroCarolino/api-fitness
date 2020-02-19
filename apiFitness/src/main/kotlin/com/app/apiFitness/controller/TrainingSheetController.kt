@@ -3,6 +3,8 @@ package com.app.apiFitness.controller
 import com.app.apiFitness.constants.ReturnMessages
 import com.app.apiFitness.controller.dto.request.ChangeTrainingSheetRequestDTO
 import com.app.apiFitness.controller.dto.request.TrainingSheetCreateRequestDTO
+import com.app.apiFitness.controller.dto.response.SearchTrainingSheetDetailResponseDTO
+import com.app.apiFitness.controller.dto.response.SearchTrainingSheetResponseDTO
 import com.app.apiFitness.controller.dto.response.StandardResponseDTO
 import com.app.apiFitness.exceptions.BusinessException
 import com.app.apiFitness.service.TrainingSheetService
@@ -15,7 +17,7 @@ import org.springframework.web.bind.annotation.*
 import java.net.URI
 
 @RestController
-@RequestMapping("/createSheet")
+@RequestMapping("/trainingSheet")
 class TrainingSheetController {
     private val logger = Logger.getLogger(javaClass)
     @Autowired
@@ -23,7 +25,7 @@ class TrainingSheetController {
     @Autowired
     private lateinit var trainingSheetService: TrainingSheetService
 
-    @PostMapping
+    @PostMapping("/create")
     fun createTrainingSheets(@RequestBody trainingSheetCreateRequestDTO: TrainingSheetCreateRequestDTO): ResponseEntity<StandardResponseDTO> {
         try {
             trainingSheetServiceImpl.create(trainingSheetCreateRequestDTO)
@@ -57,9 +59,51 @@ class TrainingSheetController {
         return ResponseEntity.created(URI("")).body(StandardResponseDTO(0,""))
     }
 
-    @GetMapping
-    fun searchAllTrainingSheetsFromTeacher(@RequestParam id: Long?): Any {
-        val trainingSheetsList = trainingSheetService.searchAllTrainingSheets(id)
-        return trainingSheetsList
+    @GetMapping(value = ["searchFromTeacher/{id}"])
+    fun searchAllTrainingSheetsFromTeacher(@PathVariable  id: Long): Any {
+        var retorno = SearchTrainingSheetResponseDTO()
+        try {
+            retorno =  trainingSheetService.searchAllTrainingSheets(id)
+        }
+        catch (ex : BusinessException){
+            logger.error(ex.message,ex)
+            retorno.cdReturn = 2
+            retorno.dsReturn = ex.message
+            return ResponseEntity.unprocessableEntity().body(retorno)
+        }
+        catch (ex : Exception){
+            logger.error(ex.message,ex)
+            retorno.cdReturn = 1
+            retorno.dsReturn = ReturnMessages.INTERNAL_SERVER_ERROR
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(retorno)
+        }
+        retorno.cdReturn = 0
+        retorno.dsReturn = ""
+        return ResponseEntity.created(URI("")).body(retorno)
+
+    }
+
+    @GetMapping(value = ["search/{id}"])
+    fun search(@PathVariable  id: Long): Any {
+        var retorno = SearchTrainingSheetDetailResponseDTO()
+        try {
+            retorno =  trainingSheetService.searchTrainingSheets(id)
+        }
+        catch (ex : BusinessException){
+            logger.error(ex.message,ex)
+            retorno.cdReturn = 2
+            retorno.dsReturn = ex.message
+            return ResponseEntity.unprocessableEntity().body(retorno)
+        }
+        catch (ex : Exception){
+            logger.error(ex.message,ex)
+            retorno.cdReturn = 1
+            retorno.dsReturn = ReturnMessages.INTERNAL_SERVER_ERROR
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(retorno)
+        }
+        retorno.cdReturn = 0
+        retorno.dsReturn = ""
+        return ResponseEntity.created(URI("")).body(retorno)
+
     }
 }
