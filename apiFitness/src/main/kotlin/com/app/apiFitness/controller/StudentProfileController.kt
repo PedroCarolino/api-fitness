@@ -1,6 +1,7 @@
 package com.app.apiFitness.controller
 
 import com.app.apiFitness.constants.ReturnMessages
+import com.app.apiFitness.controller.dto.request.TeacherProfileRequestDTO
 import com.app.apiFitness.controller.dto.request.UserRequestDTO
 import com.app.apiFitness.controller.dto.response.StandardResponseDTO
 import com.app.apiFitness.exceptions.BusinessException
@@ -16,18 +17,18 @@ import org.springframework.web.bind.annotation.RestController
 import java.net.URI
 
 @RestController
-@RequestMapping("/create")
+@RequestMapping("/studentProfile")
 class StudentProfileController {
     private val logger = Logger.getLogger(javaClass)
     @Autowired
     private lateinit var studentProfileService: StudentProfileServiceImpl
 
-    @PostMapping
-    fun signup(@RequestBody user: UserRequestDTO): ResponseEntity<StandardResponseDTO> {
-        try {
-            logger.info("Teste")
-            studentProfileService.create(user)
+    @PostMapping(value = ["/create"])
+    fun createTeacherProfile(@RequestBody user: UserRequestDTO): ResponseEntity<StandardResponseDTO> {
+        try{
+            val teacherCreated = studentProfileService.create(user)
         }
+
         catch (ex : BusinessException){
             logger.error(ex.message,ex)
             return ResponseEntity.unprocessableEntity().body(StandardResponseDTO(2,ex.message))
@@ -36,7 +37,6 @@ class StudentProfileController {
             logger.error(ex.message,ex)
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(StandardResponseDTO(1, ReturnMessages.INTERNAL_SERVER_ERROR))
         }
-
         return ResponseEntity.created(URI("")).body(StandardResponseDTO(0,""))
     }
 }

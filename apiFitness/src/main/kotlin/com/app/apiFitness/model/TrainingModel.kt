@@ -2,12 +2,13 @@ package com.app.apiFitness.model
 
 import com.app.apiFitness.database.repository.entity.TrainingEntity
 import com.fasterxml.jackson.annotation.JsonIgnore
+import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.annotation.JsonProperty
 
 data class TrainingModel(
         var id: Int? = null,
         var name: String? = null,
-        @JsonIgnore
+        @JsonInclude(JsonInclude.Include.NON_NULL)
         var concentric: String? = null,
         @JsonProperty("restTime")
         var timeBetweenTraining: Int? = null,
@@ -18,11 +19,11 @@ data class TrainingModel(
         var series: Int? = null,
         @JsonProperty("repetitions")
         var repetition: Int? = null,
-        @JsonIgnore
+        @JsonInclude(JsonInclude.Include.NON_NULL)
         var eccentric: Int? = null,
-        @JsonIgnore
+        @JsonInclude(JsonInclude.Include.NON_NULL)
         var modality: String? = null,
-        @JsonIgnore
+        @JsonInclude(JsonInclude.Include.NON_NULL)
         var machineId: Int? = null
 
 ){

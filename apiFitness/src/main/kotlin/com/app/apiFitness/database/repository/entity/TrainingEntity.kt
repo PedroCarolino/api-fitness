@@ -27,8 +27,8 @@ import javax.persistence.*
     @get:Column(name = "obs", nullable = true)
     var obs: String? = null
     @get:Basic
-    @get:Column(name = "timeBetweenTraining", nullable = true)
-    var timeBetweenTraining: String? = null
+    @get:Column(name = "time_between_training", nullable = true)
+    var timeBetweenTraining: Int? = null
     @get:Basic
     @get:Column(name = "eccentric", nullable = true)
     var eccentric: Int? = null
@@ -73,6 +73,7 @@ import javax.persistence.*
         this.weight = trainingModel.weight
         this.repetition = trainingModel.repetition
         this.series = trainingModel.series
+        this.timeBetweenTraining = trainingModel.timeBetweenTraining;
     }
 
 }

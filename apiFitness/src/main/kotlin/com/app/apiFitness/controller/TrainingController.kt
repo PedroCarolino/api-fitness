@@ -55,11 +55,11 @@ class TrainingController {
         return ResponseEntity.created(URI("")).body(StandardResponseDTO(0,""))
     }
 
-    @PostMapping(value = ["/search"])
-    fun search(@RequestBody trainingSearchRequestDTO: TrainingSearchRequestDTO): ResponseEntity<TrainingSearchResponseDTO> {
+    @GetMapping(value = ["searchTrainings/{id}"])
+    fun search(@PathVariable  id: Long): ResponseEntity<TrainingSearchResponseDTO> {
         var retorno = TrainingSearchResponseDTO()
         try {
-            retorno.trainings =  trainingServiceImpl.search(trainingSearchRequestDTO)
+            retorno.trainings =  trainingServiceImpl.searchTrainings(id)
         }
         catch (ex : BusinessException){
             logger.error(ex.message,ex)

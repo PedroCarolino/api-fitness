@@ -42,7 +42,7 @@ class TrainingSheetController {
         return ResponseEntity.created(URI("")).body(StandardResponseDTO(0,""))
     }
 
-    @PostMapping("/edit")
+    @PostMapping("/change")
     fun editTrainingSheet(@RequestBody changeTrainingSheetRequestDTO: ChangeTrainingSheetRequestDTO): ResponseEntity<StandardResponseDTO> {
         try {
             trainingSheetServiceImpl.change(changeTrainingSheetRequestDTO)

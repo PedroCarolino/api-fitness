@@ -33,7 +33,7 @@ class TrainingSheetServiceImpl() : TrainingSheetService {
     private lateinit var trainingHasTrainingsheetRepository: TrainingHasTrainingsheetRepository
 
     override fun create(trainingSheetDTO: TrainingSheetCreateRequestDTO) {
-        if(trainingsheetRepository.findByName(trainingSheetDTO.trainingSheetModel.name) != null){
+        if(trainingsheetRepository.findByName(trainingSheetDTO.trainingSheetModel.name) == null){
             saveTrainingSheet(trainingSheetDTO.trainingSheetModel)
         }
         else{
@@ -50,10 +50,10 @@ class TrainingSheetServiceImpl() : TrainingSheetService {
         return trainingRepository.save(trainingEntity)
     }
 
-    private fun createTrainingHasTrainingsheet(trainingSheetId: Int?,trainingId: Long?,orderTraining: String?):TrainingHasTrainingsheetEntity {
+    private fun createTrainingHasTrainingsheet(trainingSheetId: Long?,trainingId: Long?,orderTraining: String?):TrainingHasTrainingsheetEntity {
         var trainingHasTrainingsheetEntity = TrainingHasTrainingsheetEntity();
         trainingHasTrainingsheetEntity.orderTraining = orderTraining
-        trainingHasTrainingsheetEntity.trainingId = trainingId?.toInt()
+        trainingHasTrainingsheetEntity.trainingId = trainingId
         trainingHasTrainingsheetEntity.trainingSheetId = trainingSheetId
         return trainingHasTrainingsheetRepository.save(trainingHasTrainingsheetEntity)
     }

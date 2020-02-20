@@ -42,11 +42,11 @@ class TeacherProfileController {
         return ResponseEntity.created(URI("")).body(StandardResponseDTO(0,""))
     }
 
-    @PostMapping(value = ["/searchStudents"])
-    fun searchStudents(@RequestBody searchTeacherStudentsRequestDTO: SearchTeacherStudentsRequestDTO): ResponseEntity<SearchTeacherStudentsResponseDTO> {
+    @GetMapping(value = ["searchStudents/{id}"])
+    fun searchStudents(@PathVariable  id: Long): ResponseEntity<SearchTeacherStudentsResponseDTO> {
         var retorno = SearchTeacherStudentsResponseDTO()
         try {
-            retorno.users =  teacherProfileService.searchTeacherStudents(searchTeacherStudentsRequestDTO)
+            retorno.users =  teacherProfileService.searchTeacherStudents(id)
         }
         catch (ex : BusinessException){
             logger.error(ex.message,ex)

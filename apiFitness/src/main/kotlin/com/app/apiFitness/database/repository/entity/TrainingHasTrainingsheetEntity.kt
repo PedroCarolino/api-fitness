@@ -8,13 +8,13 @@ open class  TrainingHasTrainingsheetEntity {
     @get:Id
     @get:Column(name = "id", nullable = false)
     @get:GeneratedValue(strategy = GenerationType.IDENTITY)
-    var id: Int? = null
+    var id: Long? = null
     @get:Basic
     @get:Column(name = "training_id", nullable = true)
-    var trainingId: Int? = null
+    var trainingId: Long? = null
     @get:Basic
     @get:Column(name = "training_sheet_id", nullable = true)
-    var trainingSheetId: Int? = null
+    var trainingSheetId: Long? = null
     @get:Basic
     @get:Column(name = "order_training", nullable = true)
     var orderTraining: String? = null

@@ -3,17 +3,18 @@ package com.app.apiFitness.model
 import com.app.apiFitness.database.repository.entity.TrainingsheetEntity
 import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
+import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.annotation.JsonProperty
 
 data class TrainingSheetModel (
         var id: Long? = null,
         var name: String = "",
         var description: String? = null,
-        @JsonIgnore
+        @JsonInclude(JsonInclude.Include.NON_NULL)
         var objective: String? = null,
-        @JsonIgnore
+        @JsonInclude(JsonInclude.Include.NON_NULL)
         var studentId: Int? = null,
-        @JsonIgnore
+        @JsonInclude(JsonInclude.Include.NON_NULL)
         var teacherId: Int? = null,
         @JsonProperty("startDate")
         var dateStart: java.sql.Date? = null,

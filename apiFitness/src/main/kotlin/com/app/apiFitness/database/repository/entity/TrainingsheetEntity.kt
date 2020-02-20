@@ -12,10 +12,10 @@ open class TrainingsheetEntity () {
     @get:GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long? = null
     @get:Basic
-    @get:Column(name = "dateStart", nullable = true)
+    @get:Column(name = "date_start", nullable = true)
     var dateStart: java.sql.Date? = null
     @get:Basic
-    @get:Column(name = "dateEnd", nullable = true)
+    @get:Column(name = "date_end", nullable = true)
     var dateEnd: java.sql.Date? = null
     @get:Basic
     @get:Column(name = "description", nullable = true)

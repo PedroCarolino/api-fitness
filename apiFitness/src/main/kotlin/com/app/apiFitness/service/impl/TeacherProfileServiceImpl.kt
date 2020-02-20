@@ -50,8 +50,8 @@ class TeacherProfileServiceImpl @Autowired constructor(
         return teacherRepository.save(teacherEntity)
     }
 
-    override fun searchTeacherStudents(searchTeacherStudentsRequestDTO : SearchTeacherStudentsRequestDTO): List<UserProfileModel>? {
-        var response = userRepository.findById(searchTeacherStudentsRequestDTO.userId)
+    override fun searchTeacherStudents(id : Long): List<UserProfileModel>? {
+        var response = userRepository.findById(id)
         if(response.isEmpty){
             throw  BusinessException("Nenhum professor encontrado")
         }

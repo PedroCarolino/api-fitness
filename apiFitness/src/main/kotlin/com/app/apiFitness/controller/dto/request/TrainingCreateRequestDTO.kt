@@ -5,5 +5,5 @@ import com.app.apiFitness.model.TrainingSheetModel
 
 data class TrainingCreateRequestDTO(
     val trainingModel: TrainingModel,
-    val trainingSheetId : Int?
+    val trainingSheetId : Long?
 )

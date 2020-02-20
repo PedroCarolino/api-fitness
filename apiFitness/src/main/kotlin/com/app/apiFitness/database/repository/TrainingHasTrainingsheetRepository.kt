@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface TrainingHasTrainingsheetRepository: JpaRepository<TrainingHasTrainingsheetEntity, Long>{
-    fun findAllByTrainingSheetId(trainingSheetId: Int?): List<TrainingHasTrainingsheetEntity>
+    fun findAllByTrainingSheetId(trainingSheetId: Long?): List<TrainingHasTrainingsheetEntity>
 }

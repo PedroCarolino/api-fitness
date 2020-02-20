@@ -46,10 +46,10 @@ class TrainingServiceImpl {
         return trainingRepository.save(trainingEntity)
     }
 
-    private fun createTrainingHasTrainingsheet(trainingSheetId: Int?,trainingId: Long?,orderTraining: String?) {
+    private fun createTrainingHasTrainingsheet(trainingSheetId: Long?,trainingId: Long?,orderTraining: String?) {
         var trainingHasTrainingsheetEntity = TrainingHasTrainingsheetEntity();
         trainingHasTrainingsheetEntity.orderTraining = orderTraining
-        trainingHasTrainingsheetEntity.trainingId = trainingId?.toInt()
+        trainingHasTrainingsheetEntity.trainingId = trainingId
         trainingHasTrainingsheetEntity.trainingSheetId = trainingSheetId
         trainingHasTrainingsheetRepository.save(trainingHasTrainingsheetEntity)
     }
@@ -58,9 +58,9 @@ class TrainingServiceImpl {
         createTraining(trainingChangeRequestDTO.trainingModel)
     }
 
-    fun search(trainingSearchRequestDTO : TrainingSearchRequestDTO): List<TrainingModel>?{
+    fun searchTrainings(id: Long): List<TrainingModel>?{
 
-        return unproxyTrainingList(trainingHasTrainingsheetRepository.findAllByTrainingSheetId(trainingSearchRequestDTO.trainingSheetId))
+        return unproxyTrainingList(trainingHasTrainingsheetRepository.findAllByTrainingSheetId(id))
     }
 
     fun deleteTraining(id :Long) {
