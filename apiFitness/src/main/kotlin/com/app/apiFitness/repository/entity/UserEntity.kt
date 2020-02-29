@@ -2,6 +2,8 @@ package com.app.apiFitness.repository.entity
 
 import com.app.apiFitness.constants.enums.UserStatusEnum
 import com.app.apiFitness.model.UserProfileModel
+import lombok.AllArgsConstructor
+import lombok.Builder
 import lombok.Getter
 import lombok.Setter
 import javax.persistence.*
@@ -41,4 +43,15 @@ data class UserEntity (
         var refTeacherEntities: TeacherEntity? = null,
         @OneToMany(mappedBy = "refUserEntity", fetch = FetchType.LAZY, cascade = [(CascadeType.ALL)])
         var refGymHasUserEntities: List<GymHasUserEntity>? = null
-)
+) {
+        data class Builder(
+                var id: Int? = null,
+                var email: String? = null,
+                var password: String? = null
+        ) {
+                fun id(id: Int?) = apply { this.id = id }
+                fun email(email: String?) = apply { this.email = email }
+                fun password(password: String?) = apply { this.password = password }
+                fun build() = UserEntity(id,email,password)
+        }
+}

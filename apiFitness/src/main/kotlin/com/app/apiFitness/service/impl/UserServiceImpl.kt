@@ -13,6 +13,8 @@ import com.app.apiFitness.repository.entity.UserEntity
 import com.app.apiFitness.service.UserService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
+import java.io.IOException
+import java.util.logging.Logger
 
 @Service
 class UserServiceImpl @Autowired constructor(
@@ -25,32 +27,43 @@ class UserServiceImpl @Autowired constructor(
         return userRepository.findByEmail(email) == null
     }
 
+    @Throws(Exception::class)
     override fun createStudent(userProfileRequestDTO: UserProfileRequestDTO) {
-        val emailIsValid = verifyIfEmailIsValid(userProfileRequestDTO.user.email)
-        if (emailIsValid) {
-            val studentEntity = StudentEntity()
-            studentEntity.userId = createUser(userProfileRequestDTO).id
-            studentRepository.save(studentEntity)
+        try {
+            val emailIsValid = verifyIfEmailIsValid(userProfileRequestDTO.user.email)
+            if (emailIsValid) {
+                val student = StudentEntity()
+                student.userId = createUser(userProfileRequestDTO).id
+                studentRepository.save(student)
+            }
+        } catch (e : Exception) {
+            throw Exception("could not possible create a student user")
         }
     }
 
+    @Throws(Exception::class)
     override fun createTeacher(teacherProfileRequestDTO: TeacherProfileRequestDTO) {
-        val emailIsValid = verifyIfEmailIsValid(teacherProfileRequestDTO.user.email)
-        if (emailIsValid) {
-            val userEntityDTO = userMapper.mapTo(teacherProfileRequestDTO)
-            val teacherEntity = TeacherEntity()
-            teacherEntity.userId = createUser(userEntityDTO).id
-            teacherEntity.CREF = teacherProfileRequestDTO.CREF
-            teacherRepository.save(teacherEntity)
+        try {
+            val emailIsValid = verifyIfEmailIsValid(teacherProfileRequestDTO.user.email)
+            if (emailIsValid) {
+                val userEntityDTO = userMapper.mapTo(teacherProfileRequestDTO)
+                val teacher = TeacherEntity()
+                teacher.userId = createUser(userEntityDTO).id
+                teacher.CREF = teacherProfileRequestDTO.CREF
+                teacherRepository.save(teacher)
+            }
+        } catch (e : Exception) {
+            throw Exception("could not possible create a teacher user")
         }
     }
 
     override fun createUser(userProfileRequestDTO: UserProfileRequestDTO): UserEntity {
-        val userEntity = UserEntity()
-        userEntity.id = userProfileRequestDTO.user.id
-        userEntity.email= userProfileRequestDTO.user.email
-        userEntity.password = userProfileRequestDTO.user.password
-        return userRepository.save(userEntity)
+        val user = UserEntity.Builder()
+                .id(userProfileRequestDTO.user.id)
+                .email(userProfileRequestDTO.user.email)
+                .password(userProfileRequestDTO.user.password)
+                .build()
+        return userRepository.save(user)
     }
 
 }

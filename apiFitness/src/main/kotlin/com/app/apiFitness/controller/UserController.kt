@@ -15,25 +15,15 @@ import java.net.URI
 
 @Controller
 @RequestMapping("/create")
-class UserController @Autowired constructor(private val teacherService: UserService) {
+class UserController @Autowired constructor(private val teacherService: UserService)  {
 
     @PostMapping(value=["/teacher"])
-    fun createTeacherProfile(@RequestBody teacherProfileRequestDTO: TeacherProfileRequestDTO): ResponseEntity<StandardResponseDTO> {
-        try {
-            teacherService.createTeacher(teacherProfileRequestDTO)
-        } catch (ex : Exception){
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(StandardResponseDTO(1, "500"))
-        }
-        return ResponseEntity.created(URI("")).body(StandardResponseDTO(0,"200"))
+    fun createTeacherProfile(@RequestBody teacherProfileRequestDTO: TeacherProfileRequestDTO): ResponseEntity<Any> {
+        return ResponseEntity.ok(teacherService.createTeacher(teacherProfileRequestDTO))
     }
 
     @PostMapping(value=["/student"])
-    fun createStudentProfile(@RequestBody userProfileRequestDTO: UserProfileRequestDTO): ResponseEntity<StandardResponseDTO> {
-        try {
-            teacherService.createStudent(userProfileRequestDTO)
-        } catch (ex : Exception){
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(StandardResponseDTO(1, "500"))
-        }
-        return ResponseEntity.created(URI("")).body(StandardResponseDTO(0,"200"))
+    fun createStudentProfile(@RequestBody userProfileRequestDTO: UserProfileRequestDTO): ResponseEntity<Any> {
+        return ResponseEntity.ok(teacherService.createStudent(userProfileRequestDTO))
     }
 }
