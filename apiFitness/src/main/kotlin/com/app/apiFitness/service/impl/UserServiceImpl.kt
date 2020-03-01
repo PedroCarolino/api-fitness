@@ -23,15 +23,14 @@ class UserServiceImpl @Autowired constructor(
         private val studentRepository: StudentRepository,
         private val userMapper: UserMapper): UserService {
 
-    override fun verifyIfEmailIsValid(email: String): Boolean {
+    override fun emailExist(email: String): Boolean {
         return userRepository.findByEmail(email) == null
     }
 
     @Throws(Exception::class)
     override fun createStudent(userProfileRequestDTO: UserProfileRequestDTO) {
         try {
-            val emailIsValid = verifyIfEmailIsValid(userProfileRequestDTO.user.email)
-            if (emailIsValid) {
+            if (emailExist(userProfileRequestDTO.user.email)) {
                 val student = StudentEntity()
                 student.userId = createUser(userProfileRequestDTO).id
                 studentRepository.save(student)
@@ -44,8 +43,7 @@ class UserServiceImpl @Autowired constructor(
     @Throws(Exception::class)
     override fun createTeacher(teacherProfileRequestDTO: TeacherProfileRequestDTO) {
         try {
-            val emailIsValid = verifyIfEmailIsValid(teacherProfileRequestDTO.user.email)
-            if (emailIsValid) {
+            if (emailExist(teacherProfileRequestDTO.user.email)) {
                 val userEntityDTO = userMapper.mapTo(teacherProfileRequestDTO)
                 val teacher = TeacherEntity()
                 teacher.userId = createUser(userEntityDTO).id
