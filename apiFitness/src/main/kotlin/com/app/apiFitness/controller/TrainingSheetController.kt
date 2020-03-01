@@ -63,7 +63,31 @@ class TrainingSheetController {
     fun searchAllTrainingSheetsFromTeacher(@PathVariable  id: Long): Any {
         var retorno = SearchTrainingSheetResponseDTO()
         try {
-            retorno =  trainingSheetService.searchAllTrainingSheets(id)
+            retorno =  trainingSheetService.searchAllTrainingSheetsFromTeacher(id)
+        }
+        catch (ex : BusinessException){
+            logger.error(ex.message,ex)
+            retorno.cdReturn = 2
+            retorno.dsReturn = ex.message
+            return ResponseEntity.unprocessableEntity().body(retorno)
+        }
+        catch (ex : Exception){
+            logger.error(ex.message,ex)
+            retorno.cdReturn = 1
+            retorno.dsReturn = ReturnMessages.INTERNAL_SERVER_ERROR
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(retorno)
+        }
+        retorno.cdReturn = 0
+        retorno.dsReturn = ""
+        return ResponseEntity.created(URI("")).body(retorno)
+
+    }
+
+    @GetMapping(value = ["searchFromStudent/{id}"])
+    fun searchAllTrainingSheetsFromStudent(@PathVariable  id: Long): Any {
+        var retorno = SearchTrainingSheetResponseDTO()
+        try {
+            retorno =  trainingSheetService.searchAllTrainingSheetsFromStudent(id)
         }
         catch (ex : BusinessException){
             logger.error(ex.message,ex)

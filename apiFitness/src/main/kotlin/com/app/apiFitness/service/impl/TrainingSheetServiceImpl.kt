@@ -58,7 +58,7 @@ class TrainingSheetServiceImpl() : TrainingSheetService {
         return trainingHasTrainingsheetRepository.save(trainingHasTrainingsheetEntity)
     }
 
-    override fun searchAllTrainingSheets(id: Long): SearchTrainingSheetResponseDTO {
+    override fun searchAllTrainingSheetsFromTeacher(id: Long): SearchTrainingSheetResponseDTO {
 //        SELECT id_fichaTreino FROM fichaTreino WHERE professorId = 3
         var userResponse = userRepository.findById(id)
         var response = SearchTrainingSheetResponseDTO()
@@ -71,6 +71,27 @@ class TrainingSheetServiceImpl() : TrainingSheetService {
             }?.collect(Collectors.toList());
             response.size = response.trainingSheets?.size?.toLong()!!
             response.teacher = userResponse.get().name!!
+        }
+        return response
+
+    }
+
+    override fun searchAllTrainingSheetsFromStudent(id: Long): SearchTrainingSheetResponseDTO {
+//        SELECT id_fichaTreino FROM fichaTreino WHERE professorId = 3
+        var userResponse = userRepository.findById(id)
+        var response = SearchTrainingSheetResponseDTO()
+        if(userResponse.isEmpty){
+            throw  BusinessException("Nenhum aluno encontrado")
+        }
+        else{
+            response.trainingSheets= userResponse.get().refStudentEntities?.refTrainingsheetEntities?.stream()?.map { x->
+                TrainingSheetModel(x, x.refTrainingHasTrainingsheetEntities!!.size.toLong())
+            }?.collect(Collectors.toList());
+            response.size = response.trainingSheets?.size?.toLong()!!
+            response.teacher = userResponse.get().refStudentEntities?.refTeacherHasStudentEntities?.stream()
+                    ?.map { x-> Hibernate.unproxy(Hibernate.unproxy(x.refTeacherEntity,TeacherEntity::class.java).
+                            refUserEntity,UserEntity::class.java).name }?.collect(Collectors.toList())?.first()!!
+
         }
         return response
 

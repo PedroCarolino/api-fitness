@@ -6,7 +6,8 @@ import com.app.apiFitness.controller.dto.response.SearchTrainingSheetDetailRespo
 import com.app.apiFitness.controller.dto.response.SearchTrainingSheetResponseDTO
 
 interface TrainingSheetService {
-    fun searchAllTrainingSheets(id: Long) : SearchTrainingSheetResponseDTO
+    fun searchAllTrainingSheetsFromTeacher(id: Long) : SearchTrainingSheetResponseDTO
+    fun searchAllTrainingSheetsFromStudent(id: Long) : SearchTrainingSheetResponseDTO
     fun create(trainingSheetDTO: TrainingSheetCreateRequestDTO)
 
     fun change(changeTrainingSheetRequestDTO: ChangeTrainingSheetRequestDTO)
